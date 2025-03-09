@@ -10,6 +10,5 @@
       allowPing = false;
       trustedInterfaces = [ "tailscale0" ];
     };
-    
-
+  };
 }
