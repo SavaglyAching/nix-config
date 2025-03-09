@@ -63,8 +63,17 @@
   services.tailscale.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
-  # Temporarily disable distributed builds to isolate issues
-  nix.distributedBuilds = false;
+  networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";  # Use iwd backend for better WiFi performance
+    };
+    
+    # Enable iwd for better WiFi on modern hardware
+    wireless.iwd.enable = true;
+  };
+  
+  # Enable firmware for better hardware support
+  hardware.enableRedistributableFirmware = true;
 
   # Remote builder configuration using Tailscale
   time.timeZone = "America/Moncton";
