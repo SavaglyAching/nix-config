@@ -34,10 +34,9 @@
   networking.networkmanager = {
     enable = true;
     wifi.backend = "iwd";
-    wireless.iwd.enable = true;
   };
   
-  # Enable iwd for better WiFi on modern hardware
+  # Enable iwd for better WiFi
   networking.wireless.iwd.enable = true;
   
   # Fallback network configuration with correct interface name
