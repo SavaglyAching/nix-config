@@ -29,10 +29,12 @@
   # Surface-specific network configuration
   hardware.firmware = with pkgs; [ linux-firmware ];  # Ensure all firmware is available
   environment.systemPackages = with pkgs; [ maliit-keyboard maliit-framework ]; 
+  
   # Ensure NetworkManager is configured for Surface hardware
   networking.networkmanager = {
     enable = true;
     wifi.backend = "iwd";
+    wireless.iwd.enable = true;
   };
   
   # Enable iwd for better WiFi on modern hardware
@@ -55,28 +57,20 @@
   # Enable remote builder
   # Enable libinput for better touchscreen and touchpad support
   i18n = {
-  defaultLocale = "en_CA.UTF-8";
-  supportedLocales = [ "en_CA.UTF-8/UTF-8" ];
+    defaultLocale = "en_CA.UTF-8";
+    supportedLocales = [ "en_CA.UTF-8/UTF-8" ];
   };
 
   # Ensure Tailscale is enabled for remote builder connection
   services.tailscale.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   
-  networkmanager = {
-      enable = true;
-      wifi.backend = "iwd";  # Use iwd backend for better WiFi performance
-    };
-    
-    # Enable iwd for better WiFi on modern hardware
-    wireless.iwd.enable = true;
-  };
-  
   # Enable firmware for better hardware support
   hardware.enableRedistributableFirmware = true;
 
   # Remote builder configuration using Tailscale
   time.timeZone = "America/Moncton";
+  
   # System state version - do not change after initial setup
   system.stateVersion = "24.11";
 }

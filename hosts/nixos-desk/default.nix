@@ -28,6 +28,14 @@
     builderUser = "ham";
   };
   
+      # Extra rules for remote builder
+      extraCommands = ''
+        # Allow all connections from the Surface device for Nix remote building
+        iptables -A INPUT -p tcp -s 192.168.2.0/24 --dport 22 -j ACCEPT
+      '';
+    };
+
+
   time.timeZone = "America/Moncton";
   # Ensure ham is a trusted user for Nix operations
   nix.settings.trusted-users = [ "ham" "root" ];
