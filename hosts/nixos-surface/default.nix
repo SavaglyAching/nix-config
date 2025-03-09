@@ -25,7 +25,7 @@
   networking.hostName = "nixos-surface";
 
   # Temporarily disable waydroid to isolate issues
-  # virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.enable = true;
   # Surface-specific network configuration
   hardware.firmware = with pkgs; [ linux-firmware ];  # Ensure all firmware is available
   environment.systemPackages = with pkgs; [ maliit-keyboard maliit-framework ]; 
