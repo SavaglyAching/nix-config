@@ -11,7 +11,7 @@
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     # Temporarily commenting out remote-builder to isolate issues
-    # ../../modules/system/remote-builder.nix
+    ../../modules/system/remote-builder.nix
     
     # Desktop environment - KDE works well with touchscreens
     ../../modules/desktop/kde.nix
@@ -54,6 +54,13 @@
   # nixos-hardware documentation.
   
   # Enable remote builder
+  nix = {
+    settings.trusted-users = [ "ham" "root" ];
+    # Ensure distributed builds are enabled on the client
+    distributedBuilds = true;
+    # Additional build machines can be configured here if needed
+  };
+
   # Enable libinput for better touchscreen and touchpad support
   i18n = {
     defaultLocale = "en_CA.UTF-8";
