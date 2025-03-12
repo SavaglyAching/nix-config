@@ -33,5 +33,5 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  system.stateVersion = "nixos-24.11";
+  system.stateVersion = "24.11";
 }
