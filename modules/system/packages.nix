@@ -42,19 +42,10 @@
       instaloader
       spotdl
       yt-dlp
-      
-      # Desktop
-      vscode-fhs
-      firefox
-      librewolf
+
     ];
     
     pathsToLink = [ "/share/zsh" ];
     
-    etc."gitconfig".text = ''
-      [user]
-        name = git
-        email = git@bloood.ca
-    '';
   };
 }
