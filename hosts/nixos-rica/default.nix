@@ -8,7 +8,7 @@
     ./samba.nix
     ./docker.nix
 
-    ../../modules/desktop/desktop.nix
+    ../../modules/desktop/kde.nix
     
     # System modules
     ../../modules/system/users.nix
