@@ -12,18 +12,20 @@
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.x2goserver.enable = true;
   
-  # VNC Server (TigerVNC)
-  services.tigervnc = {
+  # VNC Server (using x11vnc)
+  services.x11vnc = {
     enable = true;
-    port = 5900;
+    auth = null;
     autoStart = true;
-    depth = 24;
-    geometry = "1920x1080";
+    port = 5900;
+    xkbLayout = "us";
+    shared = true;
+    viewonly = false;
   };
   
-  # Install helpful utilities for remote desktop access
+  # Remote desktop tools
   environment.systemPackages = with pkgs; [
-    tigervnc
+    kdePackages.krfb  # KDE's desktop sharing application
     x11vnc
     x2goclient
   ];
