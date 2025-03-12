@@ -7,6 +7,8 @@
     ./network.nix
     ./samba.nix
     ./docker.nix
+
+    ../../modules/desktop/desktop.nix
     
     # System modules
     ../../modules/system/users.nix
