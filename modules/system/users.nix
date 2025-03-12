@@ -5,7 +5,7 @@
     defaultUserShell = pkgs.zsh;
     users.ham = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "samba" "docker" "waydroid" "networkmanager" ];
+      extraGroups = [ "wheel" "samba" "docker" "waydroid" "networkmanager" "video" "render" "audio" ];
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHqNpQzPXCgbUM3EA99GXlfeL8nnDDhJEqH+ZzLy84GO j@deskv"
