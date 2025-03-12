@@ -5,8 +5,20 @@
   home.homeDirectory = "/home/ham";
   home.stateVersion = "24.11";
 
+  # Mosh Terminal
+  mosh.enable = true;
+  tmux = {
+      enable = true;
+      plugins = with pkgs; [
+        tmuxPlugins.better-mouse-mode
+      ];
+    };
+
   programs.zsh = {
     enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    enableCompletion = true;
     shellAliases = {
       nr = "sudo nixos-rebuild switch";
       nrf = "sudo nixos-rebuild switch --flake .#";
