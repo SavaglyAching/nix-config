@@ -4,7 +4,7 @@
   # KDE Connect for screen sharing and device integration
   programs.kdeconnect = {
     enable = true;
-    package = pkgs.kdePackages.kdeconnect-kde;
+  # package = pkgs.kdePackages.kdeconnect-kde;
   };
   
   # Server-side tools only (no x2go or xrdp which are causing the build errors)
