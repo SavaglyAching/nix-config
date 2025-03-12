@@ -5,35 +5,6 @@
   home.homeDirectory = "/home/ham";
   home.stateVersion = "24.11";
 
-  # Mosh Terminal
-  mosh.enable = true;
-  tmux = {
-      enable = true;
-      plugins = with pkgs; [
-        tmuxPlugins.better-mouse-mode
-      ];
-    };
-
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-    enableCompletion = true;
-    shellAliases = {
-      nr = "sudo nixos-rebuild switch";
-      nrf = "sudo nixos-rebuild switch --flake .#";
-      nm = "cd /etc/nixos";
-      nixcfg = "cd /home/ham/Documents/nixos-test";
-      m = "sudo micro";
-      mm = "sudo micro /home/ham/nixos-config/configuration.nix";
-      lzd = "lazydocker";
-      lzg = "lazygit";
-      htop = "btop";
-      df = "ncdu";
-      miniterm = "bash /scripts/terminal.sh";
-    };
-  };
-
   programs.git = {
     enable = true;
     userName = "git";
