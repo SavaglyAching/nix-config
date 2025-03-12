@@ -7,26 +7,14 @@
     package = pkgs.kdePackages.kdeconnect-kde;
   };
   
-  # X2Go Server (For remote desktop sessions)
+  # X2Go Server for remote desktop sessions
   services.xrdp.enable = true;
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.x2goserver.enable = true;
   
-  # VNC Server (using x11vnc)
-  services.x11vnc = {
-    enable = true;
-    auth = null;
-    autoStart = true;
-    port = 5900;
-    xkbLayout = "us";
-    shared = true;
-    viewonly = false;
-  };
-  
-  # Remote desktop tools
+  # Server-side tools only (no viewer clients)
   environment.systemPackages = with pkgs; [
-    kdePackages.krfb  # KDE's desktop sharing application
-    x11vnc
-    x2goclient
+    kdePackages.krfb  # KDE's built-in desktop sharing application
+    x11vnc            # VNC server that can be run manually
   ];
 }
