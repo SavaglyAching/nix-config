@@ -19,12 +19,25 @@
     port = 0;
     unixSocket = "/run/redis/redis.sock";
     unixSocketPerm = 770;
+    user = "redis";
+    settings = {
+      # Ensure directories exist
+      dir = "/var/lib/redis-nextcloud";
+      # Extra reliability settings
+      appendonly = "yes";
+      appendfsync = "everysec";
+    };
   };
+  
+  # Ensure Redis socket directory exists with proper permissions
+  systemd.tmpfiles.rules = [
+    "d /run/redis 0770 redis redis -"
+  ];
 
   # Nextcloud Configuration
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud30;  # Updated to latest version
+    package = pkgs.nextcloud29;  # Updated to latest version
     hostName = "cloud.bloood.ca";
     https = true;
     
@@ -166,10 +179,11 @@
     };
   };
 
-  # Create secrets
+  # Create secrets with proper permissions - run before other services
   systemd.services.create-nextcloud-secrets = {
     description = "Create Nextcloud secrets";
     wantedBy = [ "multi-user.target" ];
+    before = [ "acme-cloud.bloood.ca.service" "nextcloud-setup.service" "redis-nextcloud.service" ];
     after = [ "local-fs.target" ];
     serviceConfig = {
       Type = "oneshot";
@@ -177,22 +191,35 @@
     };
     script = ''
       mkdir -p /run/secrets
+      mkdir -p /run/redis
       
       # Create admin password if it doesn't exist
       if [ ! -f /run/secrets/nextcloud-adminpass ]; then
         echo "Creating Nextcloud admin password"
         # Generate a random password
         tr -dc 'A-Za-z0-9!#$%&()*+,-./:;<=>?@[\]^_{|}~' < /dev/urandom | head -c 32 > /run/secrets/nextcloud-adminpass
-        chmod 400 /run/secrets/nextcloud-adminpass
       fi
       
-      # Create Cloudflare credentials template if it doesn't exist
+      # Ensure Redis socket directory exists with proper permissions
+      chown redis:redis /run/redis
+      chmod 770 /run/redis
+      
+      # Fix permissions - ensure nextcloud user can read the password file
+      chown nextcloud:nextcloud /run/secrets/nextcloud-adminpass
+      chmod 400 /run/secrets/nextcloud-adminpass
+      
+      # Create Cloudflare credentials in the correct format
       if [ ! -f /run/secrets/cloudflare-credentials ]; then
         echo "Creating Cloudflare credentials template"
         cat > /run/secrets/cloudflare-credentials << 'EOF'
 # Cloudflare credentials for DNS validation
-# Replace with your actual API token
-dns_cloudflare_api_token = your_cloudflare_api_token
+# You need EITHER:
+# Option 1: API Token (recommended)
+CLOUDFLARE_DNS_API_TOKEN=your_cloudflare_api_token
+
+# OR Option 2: Global API Key
+# CLOUDFLARE_EMAIL=your_cloudflare_email@example.com
+# CLOUDFLARE_API_KEY=your_global_api_key
 EOF
         chmod 400 /run/secrets/cloudflare-credentials
         echo "⚠️ IMPORTANT: Edit /run/secrets/cloudflare-credentials with your actual Cloudflare API token"
@@ -204,6 +231,21 @@ EOF
   # Let the Nextcloud service handle cron jobs
   services.nextcloud.caching.apcu = true;
 
+  # Add dependencies between services
+  systemd.services.redis-nextcloud = {
+    after = [ "create-nextcloud-secrets.service" ];
+    requires = [ "create-nextcloud-secrets.service" ];
+  };
+  
+  systemd.services.nextcloud-setup = {
+    after = [ "create-nextcloud-secrets.service" ];
+    requires = [ "create-nextcloud-secrets.service" ];
+  };
+  
+  # Configure users and groups
+  # Make sure nextcloud user is in redis group to access the socket
+  users.groups.redis.members = [ "nextcloud" ];
+  
   # System tuning for Nextcloud
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 524288;
