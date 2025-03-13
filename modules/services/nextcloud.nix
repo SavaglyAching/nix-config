@@ -105,6 +105,8 @@
     virtualHosts."cloud.bloood.ca" = {
       # Let Nextcloud handle this vhost
       forceSSL = true;
+      # Use certificates from ACME
+      useACMEHost = "cloud.bloood.ca";
       
       # Add headers for Cloudflare
       extraConfig = ''
@@ -160,6 +162,7 @@
       dnsProvider = "cloudflare";
       credentialsFile = "/run/secrets/cloudflare-credentials";
       group = "nginx";
+      reloadServices = [ "nginx" ];
     };
   };
 
