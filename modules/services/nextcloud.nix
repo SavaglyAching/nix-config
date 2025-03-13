@@ -53,8 +53,8 @@
         "cron_max_age" = 43200;
       };
       
-      # Use a data directory outside of the BTRFS subvolume structure
-      "datadirectory" = lib.mkDefault "/data/nextcloud";
+      # Use the persist subvolume for Nextcloud data
+      "datadirectory" = lib.mkDefault "/persist/nextcloud";
     };
     
     # Optimize PHP settings for better performance
@@ -201,12 +201,6 @@ EOF
     "fs.inotify.max_user_watches" = 524288;
   };
 
-  # Backup configuration
-  services.postgresqlBackup = {
-    enable = true;
-    databases = [ "nextcloud" ];
-  };
-
   # Custom systemd service for periodic maintenance tasks
   systemd.services.nextcloud-maintenance = {
     description = "Nextcloud periodic maintenance tasks";
@@ -220,53 +214,5 @@ EOF
         ${pkgs.nextcloud28}/bin/nextcloud-occ files:scan --all
       '';
     };
-  };
-  
-  # Borg backup for Nextcloud data
-  services.borgbackup.jobs.nextcloudBackup = {
-    paths = [
-      "/data/nextcloud"
-      "/var/backup/postgresql"
-    ];
-    repo = "/mnt/backup/nextcloud";
-    encryption = {
-      mode = "repokey";
-      passCommand = "cat /run/secrets/borg-passphrase";
-    };
-    compression = "auto,lzma";
-    startAt = "daily";
-    environment = { BORG_RELOCATED_REPO_ACCESS_IS_OK = "yes"; };
-    prune.keep = {
-      within = "1d"; # Keep all archives within 1 day
-      daily = 7;     # Keep 7 daily archives
-      weekly = 4;    # Keep 4 weekly archives
-      monthly = 6;   # Keep 6 monthly archives
-    };
-  };
-  
-  # Create Borg passphrase
-  systemd.services.create-borg-secrets = {
-    description = "Create Borg backup secrets";
-    wantedBy = [ "multi-user.target" ];
-    after = [ "local-fs.target" ];
-    before = [ "borgbackup-job-nextcloudBackup.service" ];
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-    script = ''
-      mkdir -p /run/secrets
-      
-      # Create Borg passphrase if it doesn't exist
-      if [ ! -f /run/secrets/borg-passphrase ]; then
-        echo "Creating Borg backup passphrase"
-        tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32 > /run/secrets/borg-passphrase
-        chmod 400 /run/secrets/borg-passphrase
-        
-        # Initialize Borg repository if it doesn't exist
-        mkdir -p /mnt/backup/nextcloud
-        BORG_PASSPHRASE=$(cat /run/secrets/borg-passphrase) ${pkgs.borgbackup}/bin/borg init --encryption=repokey /mnt/backup/nextcloud
-      fi
-    '';
   };
 }
