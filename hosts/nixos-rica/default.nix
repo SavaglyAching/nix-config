@@ -8,6 +8,8 @@
     ./samba.nix
     ./docker.nix
 
+    ./nextcloud.nix
+
     ../../modules/desktop/kde.nix
     
     # System modules
