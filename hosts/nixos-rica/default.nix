@@ -10,7 +10,7 @@
 
     ./nextcloud.nix
 
-    ../../modules/desktop/kde.nix
+    # ../../modules/desktop/kde.nix
     
     # System modules
     ../../modules/system/users.nix
