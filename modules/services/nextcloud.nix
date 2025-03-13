@@ -1,34 +1,52 @@
 { config, lib, pkgs, ... }:
 
 {
+  # Enable PostgreSQL for Nextcloud
+  services.postgresql = {
+    enable = true;
+    ensureDatabases = [ "nextcloud" ];
+    ensureUsers = [
+      {
+        name = "nextcloud";
+        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+      }
+    ];
+  };
+
+  # Redis server for improved performance
+  services.redis.servers.nextcloud = {
+    enable = true;
+    port = 0;
+    unixSocket = "/run/redis/redis.sock";
+    unixSocketPerm = 770;
+  };
+
   # Nextcloud Configuration
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud28;
     hostName = "cloud.bloood.ca";
-    # Use HTTPS only
     https = true;
-    # Set to your timezone
+    
+    # Database settings 
     config = {
       adminpassFile = "/run/secrets/nextcloud-adminpass";
       adminuser = "admin";
+      dbtype = "pgsql";
+      dbname = "nextcloud";
+      dbuser = "nextcloud";
+      dbhost = "/run/postgresql"; # for the socket directory
       defaultPhoneRegion = "CA"; # Canada
       trustedProxies = [ "127.0.0.1" "::1" ];
-      # Trust Cloudflare IPs - these are the Cloudflare IPv4 ranges
-      # See: https://www.cloudflare.com/ips-v4
-      extraTrustedDomains = [ 
-        "cloud.bloood.ca"
-      ];
+      extraTrustedDomains = [ "cloud.bloood.ca" ];
       overwriteProtocol = "https";
+      
+      # Use the persist subvolume for Nextcloud data
+      datadirectory = "/persist/nextcloud";
     };
     
-    # Database Configuration (PostgreSQL is recommended for performance)
-    database = {
-      createLocally = true;
-      type = "pgsql";
-    };
-    
-    # Redis for caching and transactional locking
+    # Auto-update apps and configure Redis
+    autoUpdateApps.enable = true;
     configureRedis = true;
     
     # Performance settings
@@ -52,9 +70,6 @@
       "system" = {
         "cron_max_age" = 43200;
       };
-      
-      # Use the persist subvolume for Nextcloud data
-      "datadirectory" = lib.mkDefault "/persist/nextcloud";
     };
     
     # Optimize PHP settings for better performance
@@ -75,14 +90,6 @@
       "session.save_handler" = "redis";
       "session.save_path" = "unix:///run/redis/redis.sock";
     };
-  };
-
-  # Redis server for improved performance
-  services.redis.servers.nextcloud = {
-    enable = true;
-    port = 0;
-    unixSocket = "/run/redis/redis.sock";
-    unixSocketPerm = 770;
   };
 
   # NGINX Configuration
