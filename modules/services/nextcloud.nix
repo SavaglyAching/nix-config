@@ -24,7 +24,7 @@
   # Nextcloud Configuration
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud29;  # Updated to latest version
+    package = pkgs.nextcloud30;  # Updated to latest version
     hostName = "cloud.bloood.ca";
     https = true;
     
