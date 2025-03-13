@@ -19,7 +19,7 @@
     port = 0;
     unixSocket = "/run/redis/redis.sock";
     unixSocketPerm = 770;
-    user = "redis";
+    user = lib.mkForce "nextcloud"; # Use nextcloud user to avoid conflicts
     settings = {
       # Ensure directories exist
       dir = "/var/lib/redis-nextcloud";
