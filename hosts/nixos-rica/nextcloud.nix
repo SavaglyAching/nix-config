@@ -11,42 +11,39 @@
     # Set the domain
     hostName = "cloud.bloood.ca";
     
-    # Additional configuration specific to nixos-rica
-    config = {
-      # Trusted proxies including Cloudflare's IPs
-      trustedProxies = [
-        "127.0.0.1" 
-        "::1" 
-        "209.209.9.14" # Your server IP
-        # Cloudflare IP ranges (IPv4) - you can add more as needed
-        "173.245.48.0/20"
-        "103.21.244.0/22"
-        "103.22.200.0/22"
-        "103.31.4.0/22"
-        "141.101.64.0/18"
-        "108.162.192.0/18"
-        "190.93.240.0/20"
-        "188.114.96.0/20"
-        "197.234.240.0/22"
-        "198.41.128.0/17"
-        "162.158.0.0/15"
-        "104.16.0.0/13"
-        "104.24.0.0/14"
-        "172.64.0.0/13"
-        "131.0.72.0/22"
-      ];
-      
-      # Overrides and additional settings
-      overwriteProtocol = "https"; # Force HTTPS
-      overwriteHost = "cloud.bloood.ca";
-      overwriteWebRoot = "/";
-      
-      # PHP settings specific to this host
-      phpOptions = {
-        "upload_max_filesize" = "16G";
-        "post_max_size" = "16G";
-        "memory_limit" = "512M";
-      };
+    # Trusted proxies including Cloudflare's IPs
+    trustedProxies = [
+      "127.0.0.1" 
+      "::1" 
+      "209.209.9.14" # Your server IP
+      # Cloudflare IP ranges (IPv4)
+      "173.245.48.0/20"
+      "103.21.244.0/22"
+      "103.22.200.0/22"
+      "103.31.4.0/22"
+      "141.101.64.0/18"
+      "108.162.192.0/18"
+      "190.93.240.0/20"
+      "188.114.96.0/20"
+      "197.234.240.0/22"
+      "198.41.128.0/17"
+      "162.158.0.0/15"
+      "104.16.0.0/13"
+      "104.24.0.0/14"
+      "172.64.0.0/13"
+      "131.0.72.0/22"
+    ];
+    
+    # Overrides and additional settings
+    overwriteProtocol = "https"; # Force HTTPS
+    overwriteHost = "cloud.bloood.ca";
+    overwriteWebRoot = "/";
+    
+    # PHP settings specific to this host
+    phpOptions = {
+      "upload_max_filesize" = "16G";
+      "post_max_size" = "16G";
+      "memory_limit" = "512M";
     };
   };
 
