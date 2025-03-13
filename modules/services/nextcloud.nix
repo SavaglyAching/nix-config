@@ -10,26 +10,26 @@
     hostName = "localhost";
     https = true;
     
-    # Database configuration
-    dbtype = "pgsql";
-    adminpassFile = "/var/lib/nextcloud-admin-pass";
-    dbuser = "nextcloud";
-    dbhost = "/run/postgresql";
-    dbpassFile = "/var/lib/nextcloud-db-pass";
-    defaultPhoneRegion = "CA"; # Canada
-    
     # Storage path
     datadir = "/persist/nextcloud";
     
-    # Performance tuning
-    config = {
-      memoryLimit = 512;
-      defaultPhoneRegion = "CA";
-    };
-    
-    # Caching configuration
+    # Performance and caching
     enableAPCu = true;
     configureRedis = true;
+    
+    # Main configuration
+    config = {
+      # Database configuration
+      dbtype = "pgsql";
+      adminpassFile = "/var/lib/nextcloud-admin-pass";
+      dbuser = "nextcloud";
+      dbhost = "/run/postgresql";
+      dbpassFile = "/var/lib/nextcloud-db-pass";
+      defaultPhoneRegion = "CA"; # Canada
+      
+      # Performance tuning
+      memoryLimit = 512;
+    };
     
     # Automatic updates
     autoUpdateApps = {
@@ -86,6 +86,6 @@
   # Generate persistent directory for Nextcloud data
   systemd.tmpfiles.rules = [
     "d /persist/nextcloud 0750 nextcloud nextcloud -"
-    "d /var/lib/nextcloud-passwords 0700 nextcloud nextcloud -"
+    "d /var/lib/nextcloud-passwords 0700 root root -"
   ];
 }
