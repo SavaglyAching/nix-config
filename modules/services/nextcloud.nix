@@ -11,34 +11,31 @@
     https = true;
     
     # Database configuration
-    config = {
-      dbtype = "pgsql";
-      adminpassFile = "/var/lib/nextcloud-admin-pass";
-      dbuser = "nextcloud";
-      dbhost = "/run/postgresql";
-      dbpassFile = "/var/lib/nextcloud-db-pass";
-      defaultPhoneRegion = "CA"; # Canada
-      
-      # Performance tuning
-      memoryLimit = 512;
-      caching = {
-        apcu = true;
-        redis = true;
-        memcached = false;
-      };
-    };
+    dbtype = "pgsql";
+    adminpassFile = "/var/lib/nextcloud-admin-pass";
+    dbuser = "nextcloud";
+    dbhost = "/run/postgresql";
+    dbpassFile = "/var/lib/nextcloud-db-pass";
+    defaultPhoneRegion = "CA"; # Canada
     
     # Storage path
     datadir = "/persist/nextcloud";
+    
+    # Performance tuning
+    config = {
+      memoryLimit = 512;
+      defaultPhoneRegion = "CA";
+    };
+    
+    # Caching configuration
+    enableAPCu = true;
+    configureRedis = true;
     
     # Automatic updates
     autoUpdateApps = {
       enable = true;
       startAt = "05:00:00";
     };
-    
-    # Nginx configuration
-    configureRedis = true;
   };
   
   # PostgreSQL configuration
