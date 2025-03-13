@@ -74,21 +74,21 @@
     
     # Optimize PHP settings for better performance
     phpOptions = {
-      "opcache.interned_strings_buffer" = "16";
-      "opcache.max_accelerated_files" = "10000";
-      "opcache.memory_consumption" = "128";
-      "opcache.save_comments" = "1";
-      "opcache.revalidate_freq" = "1";
-      "opcache.jit" = "1255";
-      "opcache.jit_buffer_size" = "128M";
-      "apc.enable_cli" = "1";
-      "max_execution_time" = "300";
-      "max_input_time" = "300";
-      "memory_limit" = "512M";
-      "upload_max_filesize" = "10G";
-      "post_max_size" = "10G";
-      "session.save_handler" = "redis";
-      "session.save_path" = "unix:///run/redis/redis.sock";
+      "opcache.interned_strings_buffer" = lib.mkForce "16";
+      "opcache.max_accelerated_files" = lib.mkForce "10000";
+      "opcache.memory_consumption" = lib.mkForce "128";
+      "opcache.save_comments" = lib.mkForce "1";
+      "opcache.revalidate_freq" = lib.mkForce "1";
+      "opcache.jit" = lib.mkForce "1255";
+      "opcache.jit_buffer_size" = lib.mkForce "128M";
+      "apc.enable_cli" = lib.mkForce "1";
+      "max_execution_time" = lib.mkForce "300";
+      "max_input_time" = lib.mkForce "300";
+      "memory_limit" = lib.mkForce "512M";
+      "upload_max_filesize" = lib.mkForce "10G";
+      "post_max_size" = lib.mkForce "10G";
+      "session.save_handler" = lib.mkForce "redis";
+      "session.save_path" = lib.mkForce "unix:///run/redis/redis.sock";
     };
   };
 
@@ -214,9 +214,9 @@ EOF
       Type = "oneshot";
       User = "nextcloud";
       ExecStart = ''
-        ${pkgs.nextcloud28}/bin/nextcloud-occ db:add-missing-indices
-        ${pkgs.nextcloud28}/bin/nextcloud-occ db:convert-filecache-bigint
-        ${pkgs.nextcloud28}/bin/nextcloud-occ files:scan --all
+        ${pkgs.nextcloud29}/bin/nextcloud-occ db:add-missing-indices
+        ${pkgs.nextcloud29}/bin/nextcloud-occ db:convert-filecache-bigint
+        ${pkgs.nextcloud29}/bin/nextcloud-occ files:scan --all
       '';
     };
   };
