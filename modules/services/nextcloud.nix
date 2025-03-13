@@ -28,7 +28,10 @@
     hostName = "cloud.bloood.ca";
     https = true;
     
-    # Database settings 
+    # Set data directory location
+    datadir = "/persist/nextcloud";
+    
+    # Database and admin settings
     config = {
       adminpassFile = "/run/secrets/nextcloud-adminpass";
       adminuser = "admin";
@@ -40,9 +43,6 @@
       trustedProxies = [ "127.0.0.1" "::1" ];
       extraTrustedDomains = [ "cloud.bloood.ca" ];
       overwriteProtocol = "https";
-      
-      # Use the persist subvolume for Nextcloud data
-      datadirectory = "/persist/nextcloud";
     };
     
     # Auto-update apps and configure Redis
@@ -197,11 +197,9 @@ EOF
     '';
   };
 
-  # Automatic optimizations
-  services.nextcloud-cron = {
-    enable = true;
-    user = "nextcloud";
-  };
+  # Automatic cron job
+  # Let the Nextcloud service handle cron jobs
+  services.nextcloud.caching.apcu = true;
 
   # System tuning for Nextcloud
   boot.kernel.sysctl = {
