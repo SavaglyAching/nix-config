@@ -8,7 +8,7 @@
     ./samba.nix
     ./docker.nix
 
-    ./nextcloud.nix
+    #./nextcloud.nix
 
     # ../../modules/desktop/kde.nix
     
