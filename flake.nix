@@ -13,9 +13,13 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Add Zen Browser flake
+    zen-browser = {
+      url = "github:MarceColl/zen-browser-flake";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, zen-browser, ... }@inputs: {
     nixosConfigurations = {
       "nixos-desk" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -27,6 +31,12 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ham = import ./home/ham.nix;
+          }
+          # Add Zen Browser to system packages
+          { config, pkgs, ... }: {
+            environment.systemPackages = [
+              zen-browser.packages.x86_64-linux.default
+            ];
           }
         ];
       };
