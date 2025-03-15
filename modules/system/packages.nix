@@ -12,7 +12,9 @@
       micro
       tmux
       mosh
-      
+      sops
+      age
+
       # System administration
       btrfs-progs
       nmap
