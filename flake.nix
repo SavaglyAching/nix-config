@@ -33,11 +33,6 @@
             home-manager.users.ham = import ./home/ham.nix;
           }
           # Add Zen Browser to system packages
-          { config, pkgs, ... }: {
-            environment.systemPackages = [
-              zen-browser.packages.x86_64-linux.default
-            ];
-          }
         ];
       };
       
