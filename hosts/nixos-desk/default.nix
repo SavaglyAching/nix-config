@@ -22,11 +22,6 @@
   networking.hostName = "nixos-desk";
 
   # Remote builder configuration
-  services.remote-builder = {
-    enable = true;
-    isBuilder = true;
-    builderUser = "ham";
-  };
 
   # Firewall configuration for remote builder
   networking.firewall = {
