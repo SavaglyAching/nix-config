@@ -31,6 +31,8 @@
       iptables -A INPUT -p tcp -s 192.168.2.0/24 --dport 22 -j ACCEPT
     '';
   };
+            
+  environment.systemPackages = [ zen-browser.packages.x86_64-linux.default ];
 
   time.timeZone = "America/Moncton";
   # Ensure ham is a trusted user for Nix operations
