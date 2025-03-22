@@ -71,7 +71,8 @@
 
 # Virtual keyboard configuration
 i18n.inputMethod = {
-  enabled = "fcitx5";
+  type = "fcitx5";
+  enable = true;
   fcitx5.addons = with pkgs; [
     fcitx5-gtk
     fcitx5-configtool
@@ -80,30 +81,27 @@ i18n.inputMethod = {
 };
 
 # Ensure the maliit framework is properly configured
-services.xserver.libinput.enable = true;
+services.libinput.enable = true;
 
 # Add more comprehensive touch-related packages
 environment.systemPackages = with pkgs; [
   maliit-keyboard
   maliit-framework
   onboard      # Alternative on-screen keyboard
-  florence     # Another alternative on-screen keyboard
   fcitx5-configtool
   wev          # Tool to debug input events
 ];
 
 # Enable gesture support
-services.xserver.desktopManager.plasma6.enable = true;
-services.xserver.displayManager.sddm.settings = {
+services.desktopManager.plasma6.enable = true;
+services.displayManager.sddm.settings = {
   General = {
     InputMethod = "qtvirtualkeyboard";
   };
 };
 
 # Required for proper touch input
-hardware.opengl = {
-  enable = true;
-};
+hardware.graphics.enable = true;
 
 
   # Ensure Tailscale is enabled for remote builder connection
