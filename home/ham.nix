@@ -11,29 +11,27 @@
     userEmail = "git@bloood.ca";
   };
 
-  # Virtual keyboard settings in home-manager configuration
-programs.plasma = {
-  enable = true;
-  shortcuts = {
-    "org.kde.kdeconnect.daemon"."show-virtual-keyboard" = [ "Meta+K" ];
-  };
-};
+  # Use home.file to create custom KDE shortcut
+  home.file.".config/kglobalshortcutsrc".text = ''
+    [org.kde.kdeconnect.daemon]
+    show-virtual-keyboard=Meta+K,none,Show Virtual Keyboard
+  '';
 
-# Configure fcitx5 for the user
-home.file.".config/fcitx5/config".text = ''
-  [Keyboard]
-  NumLock=False
+  # Configure fcitx5 for the user
+  home.file.".config/fcitx5/config".text = ''
+    [Keyboard]
+    NumLock=False
 
-  [Hotkey]
-  TriggerKeys=
-  EnumerateWithTriggerKeys=True
-  AltTriggerKeys=
-  EnumerateForwardKeys=
-  EnumerateBackwardKeys=
-  EnumerateSkipFirst=False
-  EnumerateGroupForwardKeys=
-  EnumerateGroupBackwardKeys=
-'';
+    [Hotkey]
+    TriggerKeys=
+    EnumerateWithTriggerKeys=True
+    AltTriggerKeys=
+    EnumerateForwardKeys=
+    EnumerateBackwardKeys=
+    EnumerateSkipFirst=False
+    EnumerateGroupForwardKeys=
+    EnumerateGroupBackwardKeys=
+  '';
 
   home.packages = with pkgs; [
     btop
