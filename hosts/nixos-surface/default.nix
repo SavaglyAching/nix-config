@@ -103,7 +103,6 @@ services.xserver.displayManager.sddm.settings = {
 # Required for proper touch input
 hardware.opengl = {
   enable = true;
-  driSupport = true;
 };
 
 
