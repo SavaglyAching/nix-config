@@ -67,6 +67,47 @@
     supportedLocales = [ "en_CA.UTF-8/UTF-8" ];
   };
 
+
+  # Add this to your nixos-surface/default.nix file
+
+# Virtual keyboard configuration
+i18n.inputMethod = {
+  enabled = "fcitx5";
+  fcitx5.addons = with pkgs; [
+    fcitx5-gtk
+    fcitx5-configtool
+    fcitx5-with-addons
+  ];
+};
+
+# Ensure the maliit framework is properly configured
+services.xserver.libinput.enable = true;
+
+# Add more comprehensive touch-related packages
+environment.systemPackages = with pkgs; [
+  maliit-keyboard
+  maliit-framework
+  onboard      # Alternative on-screen keyboard
+  florence     # Another alternative on-screen keyboard
+  fcitx5-configtool
+  wev          # Tool to debug input events
+];
+
+# Enable gesture support
+services.xserver.desktopManager.plasma6.enable = true;
+services.xserver.displayManager.sddm.settings = {
+  General = {
+    InputMethod = "qtvirtualkeyboard";
+  };
+};
+
+# Required for proper touch input
+hardware.opengl = {
+  enable = true;
+  driSupport = true;
+};
+
+
   # Ensure Tailscale is enabled for remote builder connection
   services.tailscale.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
