@@ -28,7 +28,6 @@
   virtualisation.waydroid.enable = true;
   # Surface-specific network configuration
   hardware.firmware = with pkgs; [ linux-firmware ];  # Ensure all firmware is available
-  environment.systemPackages = with pkgs; [ maliit-keyboard maliit-framework ]; 
   
   # Ensure NetworkManager is configured for Surface hardware
   networking.networkmanager = {
