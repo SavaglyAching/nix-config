@@ -59,7 +59,7 @@
     distributedBuilds = true;
     # Additional build machines can be configured here if needed
   };
-
+  services.fcitx5.enable = true;
   # Enable libinput for better touchscreen and touchpad support
   i18n = {
     defaultLocale = "en_CA.UTF-8";
