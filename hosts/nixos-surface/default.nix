@@ -59,7 +59,7 @@
     distributedBuilds = true;
     # Additional build machines can be configured here if needed
   };
-  services.fcitx5.enable = true;
+
   # Enable libinput for better touchscreen and touchpad support
   i18n = {
     defaultLocale = "en_CA.UTF-8";
@@ -88,6 +88,7 @@ environment.systemPackages = with pkgs; [
   maliit-keyboard
   maliit-framework
   onboard      # Alternative on-screen keyboard
+  fcitx5       # Ensure fcitx5 is installed
   fcitx5-configtool
   wev          # Tool to debug input events
 ];
