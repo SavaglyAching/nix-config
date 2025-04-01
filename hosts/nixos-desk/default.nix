@@ -16,8 +16,6 @@
     ../../modules/services/tailscale.nix
     ../../modules/services/ollama.nix
     ../../modules/services/docker.nix
-    ../../modules/services/pmc-25.nix
-  ];
 
   # Host-specific network configuration
   networking.hostName = "nixos-desk";
