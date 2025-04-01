@@ -23,7 +23,7 @@
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
     ../../modules/services/remote-desktop.nix
-    ]
+    ];
 
   # System state version - do not change after initial setup
   system.stateVersion = "24.11";
