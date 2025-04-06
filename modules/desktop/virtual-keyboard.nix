@@ -6,7 +6,6 @@
   environment.systemPackages = with pkgs; [
     # On-screen keyboards
     onboard        # GTK-based flexible on-screen keyboard
-    florence       # Extensible scalable on-screen keyboard
     
     # Input method frameworks
     fcitx5
