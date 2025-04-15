@@ -64,23 +64,6 @@
     supportedLocales = [ "en_CA.UTF-8/UTF-8" ];
   };
 
-  # Additional GNOME settings specific to Surface
-  services.xserver.desktopManager.gnome = {
-    extraGSettingsOverrides = ''
-      # Additional Surface-specific GNOME settings
-      [org.gnome.desktop.peripherals.touchpad]
-      tap-to-click=true
-      natural-scroll=true
-      
-      [org.gnome.desktop.peripherals.touchscreen]
-      display=['LVDS-1']
-      
-      [org.gnome.settings-daemon.plugins.power]
-      power-button-action='suspend'
-      sleep-inactive-ac-type='suspend'
-      sleep-inactive-battery-type='suspend'
-    '';
-  };
 
   # Surface hardware support
   hardware.graphics.enable = true;
