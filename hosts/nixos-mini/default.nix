@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -23,7 +23,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
- boot.loader.grub.enable = false; # Ensure GRUB is disabled
+ boot.loader.grub.enable = lib.mkForce false; # Force GRUB disable for this host
 
   networking.hostName = "nixos-mini";
   networking.networkmanager.enable = true;
