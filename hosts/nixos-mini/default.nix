@@ -27,6 +27,10 @@
   networking.hostName = "nixos-mini";
   networking.networkmanager.enable = true;
 
+ # Allow DHCP client traffic through the firewall (port 68)
+ # This merges with rules from modules/system/network.nix
+ networking.firewall.allowedUDPPorts = [ 68 ];
+
   time.timeZone = "America/Moncton";
   i18n.defaultLocale = "en_CA.UTF-8";
 
