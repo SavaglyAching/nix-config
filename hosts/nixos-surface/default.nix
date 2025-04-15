@@ -13,8 +13,8 @@
     ../../modules/system/nix.nix
     ../../modules/system/remote-builder.nix
     
-    # Replace KDE with GNOME
-    ../../modules/desktop/gnome.nix
+    # Use KDE Plasma
+    ../../modules/desktop/kde.nix
     
     # Services
     ../../modules/services/ssh.nix
@@ -24,9 +24,6 @@
   # Host-specific network configuration
   networking.hostName = "nixos-surface";
 
-  # Waydroid (Android container)
-  virtualisation.waydroid.enable = true;
-  
   # Surface-specific hardware support
   hardware.firmware = with pkgs; [ linux-firmware ];
   
@@ -48,9 +45,8 @@
     "dialout"  # For serial devices
   ];
 
-  # Surface-specific tablet support
-  services.xserver.wacom.enable = true;
-  hardware.sensor.iio.enable = true;  # Screen rotation
+  # Screen rotation (handled by nixos-hardware or KDE)
+  # hardware.sensor.iio.enable = true; # Keep commented for now, may be auto-enabled
   
   # Enable remote builder
   nix = {
@@ -63,6 +59,9 @@
     defaultLocale = "en_CA.UTF-8";
     supportedLocales = [ "en_CA.UTF-8/UTF-8" ];
   };
+
+  # Enable Wayland session for KDE's display manager (SDDM)
+  services.displayManager.sddm.wayland.enable = true;
 
 
   # Surface hardware support
