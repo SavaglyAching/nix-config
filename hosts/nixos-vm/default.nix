@@ -19,6 +19,19 @@
   # VirtualBox guest additions
   virtualisation.virtualbox.guest.enable = true;
   
+  # VM-specific boot configuration
+  boot.loader = {
+    # Use GRUB with MBR for VirtualBox VMs
+    grub = {
+      enable = true;
+      device = "/dev/sda";
+      efiSupport = false;
+      useOSProber = true;
+    };
+    # Disable EFI for VirtualBox VM
+    efi.canTouchEfiVariables = false;
+  };
+  
   # Shared folders configuration
   fileSystems."/shared" = {
     fsType = "vboxsf";
@@ -33,7 +46,7 @@
     git
     gitui
     lazygit
-    
+
     
     # Additional development tools
     nodejs
