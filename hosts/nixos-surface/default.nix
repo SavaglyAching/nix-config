@@ -52,6 +52,7 @@
   nix = {
     settings.trusted-users = [ "ham" "root" ];
     distributedBuilds = true;
+    settings.builders = [ "ssh://eu.nixbuild.net x86_64-linux" ]; # Add this line
   };
 
   # Locale settings
