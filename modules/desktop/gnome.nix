@@ -29,7 +29,7 @@
   # Install GNOME-specific packages that enhance touchscreen experience
   environment.systemPackages = with pkgs; [
     pkgs.gnome-tweaks
-    gnome.gnome-shell-extensions
+    pkgs.gnome-shell-extensions
     gnome-extension-manager
     gnomeExtensions.dash-to-panel
     gnomeExtensions.gesture-improvements
