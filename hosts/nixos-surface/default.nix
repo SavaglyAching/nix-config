@@ -14,7 +14,7 @@
     ../../modules/system/remote-builder.nix
     
     # Use KDE Plasma
-    ../../modules/desktop/kde.nix
+    ../../modules/desktop/gnome.nix
     
     # Services
     ../../modules/services/ssh.nix
@@ -50,7 +50,10 @@
   
   # Enable remote builder
   nix = {
-    settings.trusted-users = [ "ham" "root" ];
+    settings = {
+      trusted-users = [ "ham" "root" ];
+      builders-use-substitutes = true; # Recommended by nixbuild.net
+    };
     distributedBuilds = true;
     # settings.builders = [ "ssh://eu.nixbuild.net x86_64-linux" ]; # Use buildMachines instead
     buildMachines = [
@@ -59,8 +62,8 @@
         system = "x86_64-linux";
         maxJobs = 100; # As per nixbuild.net docs
         supportedFeatures = [ "benchmark" "big-parallel" ]; # As per nixbuild.net docs
-        sshUser = "ham"; # Assuming you connect as 'ham' based on the failed build log
-        sshKey = "/root/.ssh/my-nixbuild-key"; # Updated path
+        # sshUser = "ham"; # Let SSH config handle user
+        # sshKey = "/root/.ssh/my-nixbuild-key"; # Let SSH config handle key
       }
     ];
   };
