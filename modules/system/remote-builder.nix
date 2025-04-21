@@ -8,7 +8,7 @@
       PubkeyAcceptedKeyTypes ssh-ed25519
       ServerAliveInterval 60
       IPQoS throughput
-      IdentityFile /home/ham/.ssh/my-nixbuild-key
+      IdentityFile /root/.ssh/my-nixbuild-key # Updated path
     '';
     knownHosts = {
       nixbuild = {

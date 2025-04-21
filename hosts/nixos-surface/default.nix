@@ -52,7 +52,17 @@
   nix = {
     settings.trusted-users = [ "ham" "root" ];
     distributedBuilds = true;
-    settings.builders = [ "ssh://eu.nixbuild.net x86_64-linux" ]; # Add this line
+    # settings.builders = [ "ssh://eu.nixbuild.net x86_64-linux" ]; # Use buildMachines instead
+    buildMachines = [
+      {
+        hostName = "eu.nixbuild.net";
+        system = "x86_64-linux";
+        maxJobs = 100; # As per nixbuild.net docs
+        supportedFeatures = [ "benchmark" "big-parallel" ]; # As per nixbuild.net docs
+        sshUser = "ham"; # Assuming you connect as 'ham' based on the failed build log
+        sshKey = "/root/.ssh/my-nixbuild-key"; # Updated path
+      }
+    ];
   };
 
   # Locale settings
