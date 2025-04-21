@@ -32,7 +32,7 @@
     pkgs.gnome-shell-extensions
     gnome-extension-manager
     gnomeExtensions.dash-to-panel
-    gnomeExtensions.gesture-improvements
+    # gesture-improvements seems to be unavailable
     gnomeExtensions.disable-gestures
     touchegg
     libinput
