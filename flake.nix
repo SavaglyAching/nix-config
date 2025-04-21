@@ -30,8 +30,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ham = import ./home/ham.nix {
-              inherit zen-browser;
+            home-manager.users.ham = { config, pkgs, ... }: import ./home/ham.nix {
+              inherit config pkgs zen-browser;
             };
           }
         ];
@@ -75,8 +75,8 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ham = import ./home/ham.nix {
-              inherit zen-browser;
+            home-manager.users.ham = { config, pkgs, ... }: import ./home/ham.nix {
+              inherit config pkgs zen-browser;
             };
           }
         ];
