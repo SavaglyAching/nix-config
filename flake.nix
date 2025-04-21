@@ -75,7 +75,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.ham = import ./home/ham.nix;
+            home-manager.users.ham = import ./home/ham.nix {
+              inherit zen-browser;
+            };
           }
         ];
       };
