@@ -35,8 +35,6 @@
     gitui
     lazygit
     
-    # VirtualBox utilities
-    virtualbox-guest-utils
     
     # Additional development tools
     nodejs
