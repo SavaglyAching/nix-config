@@ -74,10 +74,6 @@
     supportedLocales = [ "en_CA.UTF-8/UTF-8" ];
   };
 
-  # Enable Wayland session for KDE's display manager (SDDM)
-  services.displayManager.sddm.wayland.enable = true;
-
-
   # Surface hardware support
   hardware.graphics.enable = true;
   hardware.enableRedistributableFirmware = true;
