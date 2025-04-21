@@ -14,7 +14,7 @@
     ../../modules/system/remote-builder.nix
     
     # Use KDE Plasma
-    ../../modules/desktop/gnome.nix
+    ../../modules/desktop/kde.nix
     
     # Services
     ../../modules/services/ssh.nix
@@ -61,7 +61,7 @@
   };
 
   # Enable Wayland session for KDE's display manager (SDDM)
-  # GNOME uses GDM, SDDM setting removed.
+  services.displayManager.sddm.wayland.enable = true;
 
 
   # Surface hardware support
