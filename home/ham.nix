@@ -1,4 +1,4 @@
-{ config, pkgs, zen-browser, ... }:
+{ config, pkgs, ... }:
 
 {
   home.username = "ham";
@@ -52,7 +52,5 @@
     spotdl
     yt-dlp
     
-    # Zen Browser
-    zen-browser.packages."x86_64-linux".default
   ];
 }

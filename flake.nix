@@ -13,13 +13,9 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # Add Zen Browser flake
-    zen-browser = {
-      url = "github:MarceColl/zen-browser-flake";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, zen-browser, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, sops-nix, ... }@inputs: {
     nixosConfigurations = {
       "nixos-desk" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -31,7 +27,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ham = { config, pkgs, ... }: import ./home/ham.nix {
-              inherit config pkgs zen-browser;
+              inherit config pkgs;
             };
           }
         ];
@@ -76,7 +72,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.ham = { config, pkgs, ... }: import ./home/ham.nix {
-              inherit config pkgs zen-browser;
+              inherit config pkgs;
             };
           }
         ];

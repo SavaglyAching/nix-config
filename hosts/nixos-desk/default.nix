@@ -31,7 +31,7 @@
     '';
   };
             
-  environment.systemPackages = [ zen-browser.packages.x86_64-linux.default ];
+  environment.systemPackages = [ ]; # zen-browser removed
 
   time.timeZone = "America/Moncton";
   # Ensure ham is a trusted user for Nix operations
