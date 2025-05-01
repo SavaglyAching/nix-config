@@ -16,6 +16,11 @@
         nm = "cd /etc/nixos";
         nixcfg = "cd /home/ham/Documents/nixos-test";
         
+
+        yt() {
+            yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 60 "$1"
+            }
+        }
         # Editor shortcuts
         m = "sudo micro";
         mm = "sudo micro /home/ham/nixos-config/configuration.nix";
