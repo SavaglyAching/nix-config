@@ -11,7 +11,7 @@
         prefixLength = 24;
       }];
     };
-    nameservers = [ "9.9.9.9" ];
+    nameservers = [ "1.1.1.1" "8.8.8.8" ]; # Changed to Cloudflare and Google DNS
 
     # Firewall settings
     firewall = {
