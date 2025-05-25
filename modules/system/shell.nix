@@ -17,9 +17,6 @@
         nixcfg = "cd /home/ham/Documents/nixos-test";
         
 
-        yt() {
-    yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 60 "$@"
-}
         # Editor shortcuts
         m = "sudo micro";
         mm = "sudo micro /home/ham/nixos-config/configuration.nix";
@@ -35,6 +32,18 @@
         # Misc
         miniterm = "bash /scripts/terminal.sh";
       };
+
+        initExtra = ''
+    # Your Zsh function goes here, exactly as it would in .zshrc
+    yt() {
+        yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 60 "$@"
+    }
+
+    # You can add other functions or Zsh commands here too
+    # another_func() {
+    #   echo "Hello from Zsh initExtra"
+    # }
+  '';
     };
     
     # TMUX Configuration
