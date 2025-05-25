@@ -18,9 +18,8 @@
         
 
         yt() {
-            yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 60 "$1"
-            }
-        }
+    yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 60 "$@"
+}
         # Editor shortcuts
         m = "sudo micro";
         mm = "sudo micro /home/ham/nixos-config/configuration.nix";
