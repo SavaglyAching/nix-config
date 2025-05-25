@@ -1,10 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }: # This indicates the file is a NixOS module.
 
 {
   # Shell and Terminal Configuration
-  programs = {
+  programs = { # Main 'programs' block
+
     # ZSH Configuration
-    zsh = {
+    zsh = { # Zsh specific configurations
       enable = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
@@ -31,20 +32,22 @@
         
         # Misc
         miniterm = "bash /scripts/terminal.sh";
-      };
+      }; # shellAliases block is closed
 
-        initExtra = ''
-    # Your Zsh function goes here, exactly as it would in .zshrc
-    yt() {
-        yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 60 "$@"
-    }
+      # THIS IS CORRECTLY PLACED:
+      initExtra = ''
+        # Your Zsh function goes here, exactly as it would in .zshrc
+        # (These comments below are for Zsh, so they correctly use # already)
+        yt() {
+            yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 60 "$@"
+        }
 
-    # You can add other functions or Zsh commands here too
-    # another_func() {
-    #   echo "Hello from Zsh initExtra"
-    # }
-  '';
-    };
+        # You can add other functions or Zsh commands here too
+        # another_func() {
+        #   echo "Hello from Zsh initExtra"
+        # }
+      ''; # initExtra is defined as a direct attribute of zsh
+    }; # zsh block is closed
     
     # TMUX Configuration
     tmux = {
@@ -52,9 +55,9 @@
       plugins = with pkgs; [
         tmuxPlugins.better-mouse-mode
       ];
-    };
+    }; # tmux block is closed
     
     # Mosh Terminal
     mosh.enable = true;
-  };
+  }; # programs block is closed
 }
