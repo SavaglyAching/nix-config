@@ -7,7 +7,7 @@
     # Function to run yt-dlp with ntfy start/finish notifications
     _yt_with_ntfy() {
         # --- USER CONFIGURATION START ---
-        local ntfy_topic="your_ntfy_topic"  # !!! IMPORTANT: Change this to your ntfy.sh topic !!!
+        local ntfy_topic="3PjcaNe9rKqXfCAz4ev"  # !!! IMPORTANT: Change this to your ntfy.sh topic !!!
         local ntfy_server="https://ntfy.sh"    # Change if you self-host ntfy
         # If your ntfy topic requires authentication, add curl options like:
         # local ntfy_auth_header="-H \"Authorization: Bearer your_access_token\""
@@ -29,7 +29,7 @@
         yt-dlp --retries infinite \
                --fragment-retries infinite \
                --socket-timeout 90 \
-               --cookies cookies.txt \
+               --cookies /home/ham/cookies.txt \
                "$@"
         local exit_status=$?
 
