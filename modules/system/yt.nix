@@ -3,7 +3,7 @@
 {
 
   # 2. Configure Bash
-  programs.bash.initExtra = ''
+  programs.zsh.initExtra = ''
     # Function to run yt-dlp with ntfy start/finish notifications
     _yt_with_ntfy() {
         # --- USER CONFIGURATION START ---
