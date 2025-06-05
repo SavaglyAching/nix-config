@@ -28,7 +28,7 @@
         htop = "btop"; # btop is a better htop
         df = "ncdu"; # ncdu is a better df
         
-        yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 90";
+#
         # Misc
         miniterm = "bash /scripts/terminal.sh";
       };
