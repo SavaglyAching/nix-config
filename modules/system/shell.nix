@@ -15,7 +15,7 @@
         nrf = "sudo nixos-rebuild switch --flake .#";
         nm = "cd /etc/nixos";
         nixcfg = "cd /home/ham/Documents/nixos-test";
-        
+    
         # Editor shortcuts
         m = "sudo micro";
         mm = "sudo micro /home/ham/nixos-config/configuration.nix";
@@ -28,6 +28,7 @@
         htop = "btop"; # btop is a better htop
         df = "ncdu"; # ncdu is a better df
         
+#
         # Misc
         miniterm = "bash /scripts/terminal.sh";
       };
