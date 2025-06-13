@@ -15,7 +15,6 @@
     # System modules
     ../../modules/system/users.nix
     ../../modules/system/shell.nix
-    ../../modules/system/yt.nix
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/btrfs.nix
