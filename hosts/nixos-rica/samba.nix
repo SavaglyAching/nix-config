@@ -21,6 +21,7 @@
         "create mask" = "0664";
         "directory mask" = "0775";
         "force user" = "ham";
+        "force group" = "users";
         "valid users" = "ham";
       };
       # New share for /home/ham
@@ -32,6 +33,7 @@
         "create mask" = "0664";
         "directory mask" = "0775";
         "force user" = "ham";
+        "force group" = "users";
         "valid users" = "ham";
         "comment" = "Home directory for ham user";
       };
