@@ -4,7 +4,7 @@
   # Network Configuration
   networking = {
     hostName = "nixos-rica";
-    defaultGateway = "209.209.9.1";
+    defaultGateway = { address = "209.209.9.1"; interface = "enX0"; };
     useDHCP = false;
     interfaces.enX0 = {
       ipv4.addresses = [{
