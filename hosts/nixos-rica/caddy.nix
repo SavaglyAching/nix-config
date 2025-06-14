@@ -3,10 +3,14 @@
 {
   services.caddy = {
     enable = true;
-    extraConfig = ''
-      unraid.jadenmae.com {
-        reverse_proxy cloud:80
-      }
-    '';
+    virtualHosts = {
+      "unraid.jadenmae.com" = {
+        proxies = {
+          "/" = {
+            upstream = "http://cloud:80";
+          };
+        };
+      };
+    };
   };
 }
