@@ -12,7 +12,7 @@
     ../../modules/system/nix.nix
 
     # Desktop environment (choose one)
-    ../../modules/desktop/kde.nix
+    # ../../modules/desktop/kde.nix
     
     # Services (uncomment as needed)
     ../../modules/services/ssh.nix
