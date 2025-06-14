@@ -33,13 +33,7 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/nixos-mini-vm
-          home-manager.nixosModules.home-manager
           sops-nix.nixosModules.sops  # Add sops module
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.ham = import ./home/ham.nix;
-          }
         ];
       };
 
