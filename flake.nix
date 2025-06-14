@@ -33,7 +33,6 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/nixos-mini-vm
-          sops-nix.nixosModules.sops  # Add sops module
         ];
       };
 
