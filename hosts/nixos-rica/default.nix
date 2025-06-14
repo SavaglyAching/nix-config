@@ -7,7 +7,7 @@
     ./network.nix
     ./samba.nix
     ./docker.nix
-   
+    ./caddy.nix
 
     #./nextcloud.nix
 
