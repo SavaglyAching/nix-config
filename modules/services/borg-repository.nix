@@ -39,7 +39,7 @@ in
       # but this integrates it into your NixOS configuration.
       (pkgs.writeText "borgbackup_authorized_keys" ''
         command="borg serve --restrict-to-repository ${borgRepoPath}",restrict ${unraidClientSshKey}
-      '')
+      '').outPath
     ];
 
     # Optional: Further harden SSH if desired
