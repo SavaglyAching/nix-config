@@ -17,7 +17,7 @@
     # Firewall settings
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 ];
+      allowedTCPPorts = [ 22 80 443 ];
       allowedUDPPorts = [ 41641 ]; # Tailscale port
       allowPing = false;
       trustedInterfaces = [ "tailscale0" ];
