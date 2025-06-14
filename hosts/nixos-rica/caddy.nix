@@ -3,7 +3,7 @@
 {
   services.caddy = {
     enable = true;
-    virtualHosts."100.122.111.121" = {
+    virtualHosts."unraid.jadenmae.com" = {
       extraConfig = ''
         reverse_proxy 100.122.111.121:80
       '';
