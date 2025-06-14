@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }:
 
+
 {
   services.ollama = {
     enable = true;
@@ -9,4 +10,5 @@
     port = 11434;
     openFirewall = true;
   };
+
 }

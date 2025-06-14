@@ -7,6 +7,7 @@
 
   environment.systemPackages = with pkgs; [
     maliit-keyboard
+    librewolf
   ];
 
   environment.sessionVariables = {
