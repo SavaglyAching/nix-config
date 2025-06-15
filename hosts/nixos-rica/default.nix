@@ -24,7 +24,6 @@
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
     ../../modules/services/remote-desktop.nix
-    ../../modules/services/borg-repository.nix
     ];
 
   # System state version - do not change after initial setup
