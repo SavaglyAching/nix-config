@@ -31,7 +31,7 @@
 
   # /etc/nixos/configuration.nix2
 
- fileSystems."/ip/Stuff" = {
+ fileSystems."/mnt/Stuff" = {
   device = "//cloud/Stuff";
   fsType = "cifs";
   options = let
