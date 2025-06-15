@@ -10,7 +10,7 @@
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/btrfs.nix
-   # ../../modules/system/remote-builder.nix
+    ../../modules/system/remote-builder.nix
     ../../modules/desktop/kde.nix
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
@@ -23,7 +23,7 @@
             
   hardware.bluetooth.enable = true;
   time.timeZone = "America/Moncton";
-  # Ensure ham is a trusted user for Nix operations
+  # Ensure ham is a trusted user for Nix operations, which is required for remote building.
   nix.settings.trusted-users = [ "ham" "root" ];
   networking.networkmanager.enable = true;
   # System state version

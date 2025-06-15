@@ -26,6 +26,19 @@
     ../../modules/services/remote-desktop.nix
     ];
 
+  # Configure nixos-desk as a remote builder
+  nix.buildMachines = [
+    {
+      hostName = "nixos-desk";
+      sshUser = "ham";
+      sshKey = "/home/ham/.ssh/id_ed25519";
+      maxJobs = 8;
+      speedFactor = 2;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" ];
+      mandatoryFeatures = [ ];
+    }
+  ];
+
   environment.systemPackages = with pkgs; [
    borgbackup
   ];

@@ -1,23 +1,17 @@
 { config, lib, pkgs, ... }:
+
 {
+  # Enable this host to be used as a remote builder by other machines.
+  # This allows the machine to accept build tasks from other NixOS systems
+  # on the network, provided they have the correct SSH access.
+  nix.distributedBuilds = true;
 
-   # SSH Configuration for Distributed Builds
-  programs.ssh = {
-    extraConfig = ''
-      Host eu.nixbuild.net
-      PubkeyAcceptedKeyTypes ssh-ed25519
-      ServerAliveInterval 60
-      IPQoS throughput
-      IdentityFile /root/.ssh/my-nixbuild-key # Updated path
-    '';
-    knownHosts = {
-      nixbuild = {
-        hostNames = [ "eu.nixbuild.net" ];
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM";
-      };
-    };
-  };
-  
+  # The builder user must be trusted for Nix operations.
+  # This is configured in the host-specific file (e.g., hosts/nixos-desk/default.nix)
+  # to ensure it includes all necessary users for that host.
+  # Example: nix.settings.trusted-users = [ "root" "ham" ];
 
-
+  # The SSH service must be enabled for clients to connect.
+  # This is handled by importing the ssh module, e.g.:
+  # imports = [ ../../modules/services/ssh.nix ];
 }

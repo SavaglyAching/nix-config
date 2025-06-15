@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     maliit-keyboard
     librewolf
+    vscode-fhs
   ];
 
   environment.sessionVariables = {

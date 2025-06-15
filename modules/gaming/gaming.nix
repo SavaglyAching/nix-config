@@ -13,7 +13,7 @@
     winetricks
     nvtopPackages.amd
     protonup-qt
-    rocm-smi
+   # rocm-smi
   ];
 
   # Enable and configure Steam
@@ -34,7 +34,7 @@
 
   # Add ROCm packages for GPU compute
   hardware.opengl.extraPackages = with pkgs; [
-    rocm-opencl-icd
+   # rocm-opencl-icd
   ];
   
 

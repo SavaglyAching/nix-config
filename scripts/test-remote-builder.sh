@@ -2,7 +2,7 @@
 # Script to test and troubleshoot remote builder connections
 
 # Default values
-REMOTE_IP="192.168.2.254"
+REMOTE_IP="nixos-desk"
 SSH_USER="ham"
 SSH_KEY="/home/ham/.ssh/id_ed25519"
 
@@ -22,7 +22,7 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     --surface)
-      SSH_KEY="/home/ham/.ssh/surface-remote-builder"
+      SSH_KEY="/home/ham/.ssh/id_ed25519"
       shift
       ;;
     --help)
