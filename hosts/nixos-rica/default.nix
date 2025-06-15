@@ -26,6 +26,10 @@
     ../../modules/services/remote-desktop.nix
     ];
 
+  environment.systemPackages = with pkgs; [
+   borgbackup
+  ];
+
   # System state version - do not change after initial setup
   system.stateVersion = "24.11";
 }
