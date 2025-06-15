@@ -10,6 +10,7 @@
     ../../modules/system/shell.nix
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
+    ../../modules/system/smb.nix
 
     # Desktop environment (choose one)
     # ../../modules/desktop/kde.nix
@@ -31,17 +32,7 @@
 
   # /etc/nixos/configuration.nix2
 
- fileSystems."/mnt/Stuff" = {
-  device = "//cloud/Stuff";
-  fsType = "cifs";
-  options = let
-    # These options prevent the system from hanging at boot if the network is unavailable. [1, 2]
-    automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
-  in [
-    # Get your UID and GID by running the `id` command in your terminal
-    "${automount_opts},credentials=/home/ham/smb-secrets,uid=1000,gid=100,noserverino"
-  ];
- };
+
 
  # Allow DHCP client traffic through the firewall (port 68)
  # This merges with rules from modules/system/network.nix
