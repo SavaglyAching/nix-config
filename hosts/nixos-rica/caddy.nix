@@ -5,11 +5,9 @@
     enable = true;
     virtualHosts = {
       "unraid.jadenmae.com" = {
-        proxies = {
-          "/" = {
-            upstream = "http://cloud:80";
-          };
-        };
+        extraConfig = ''
+          reverse_proxy http://cloud:80
+        '';
       };
     };
   };
