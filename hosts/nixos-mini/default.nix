@@ -29,7 +29,7 @@
   networking.networkmanager.enable = true;
 
 
-  # /etc/nixos/configuration.nix
+  # /etc/nixos/configuration.nix2
 
  fileSystems."/ip/Stuff" = {
   device = "//cloud/Stuff";
