@@ -3,14 +3,13 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
+    # This is the only hardware-specific input you need.
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-
-    # Corrected URL: Explicitly points to the 'main' branch to resolve fetch errors.
-    # This flake provides the linux-surface kernel.
-    nix-surface.url = "github:linux-surface/nix-surface/main";
   };
 
-  outputs = { self, nixpkgs, nixos-hardware, nix-surface, ... }@inputs: {
+  # Note: 'nix-surface' is removed from the function arguments here.
+  outputs = { self, nixpkgs, nixos-hardware, ... }@inputs: {
     nixosConfigurations = {
       # --- Your Other Host Configurations ---
       "nixos-desk" = nixpkgs.lib.nixosSystem {
@@ -38,22 +37,19 @@
         modules = [ ./hosts/nixos-vm ];
       };
 
-      # --- Surface Pro 7 Configuration ---
+      # --- Surface Pro 7 Configuration (Corrected) ---
       "nixos-surface" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          # Pass all flake inputs to the modules
           inherit inputs;
         };
         modules = [
-          # 1. Import your host-specific configuration
+          # 1. Your host-specific configuration file.
           ./hosts/nixos-surface
 
-          # 2. Apply the specific hardware profile for the Surface Pro 7
+          # 2. The module for the Surface Pro 7 from nixos-hardware.
+          # This single line handles the kernel, firmware, and other settings.
           nixos-hardware.nixosModules.microsoft-surface-pro-7
-
-          # 3. Apply the nix-surface module, which provides the patched kernel
-          nix-surface.nixosModules.default
         ];
       };
     };

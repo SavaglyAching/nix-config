@@ -1,9 +1,9 @@
 # hosts/nixos-surface/default.nix
-{ config, lib, pkgs, nix-surface, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [
-    # System modules (assuming these paths are correct relative to your flake root)
+    # System modules (ensure these paths are correct)
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
     ../../modules/system/users.nix
@@ -12,41 +12,42 @@
     ../../modules/system/nix.nix
     ../../modules/system/remote-builder.nix
     
-    ## Desktop environment (choose one)
-
-    ../../modules/desktop/gnome.nix # Make sure this path points to your KDE Plasma module
+    # Use KDE Plasma - ensure this points to your KDE module
+    ../../modules/desktop/kde.nix
     
     # Services
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
   ];
 
-  # Use the linux-surface kernel for optimal hardware support
-  boot.kernelPackages = pkgs.linuxPackages_surface;
+  # REMOVED: This is now handled by nixos-hardware and must be removed.
+  # boot.kernelPackages = pkgs.linuxPackages_surface;
 
   # Host-specific network configuration
   networking.hostName = "nixos-surface";
 
   # Network configuration using iwd backend
-  # This is a cleaner way to enable NetworkManager with iwd
   services.NetworkManager.enable = true;
   services.iwd.enable = true;
-  networking.wireless.iwd.enable = true; # Explicitly enabling iwd can help in some setups
+  networking.wireless.iwd.enable = true;
 
-  # Add user to required groups for a typical desktop
+  # Add user to required groups
   users.users.ham.extraGroups = [ 
     "networkmanager" 
-    "wheel" # For administrative tasks with sudo
+    "wheel"    # For admin tasks with sudo
     "input"
     "video"
     "dialout"
+    "surface-control" # To use surface-control tool without sudo
   ];
 
-  # Enable remote builder with improved security
+  # Explicitly enable surface-control tools (good practice)
+  # This is handled by the nixos-hardware module, but being explicit is clear.
+  hardware.microsoft-surface.surface-control.enable = true;
+  
+  # Remote builder with improved security
   nix = {
     settings = {
-      # Restrict trusted-users for better security.
-      # Your user 'ham' should use sudo for privileged operations.
       trusted-users = [ "root" ];
       builders-use-substitutes = true;
     };
@@ -57,10 +58,8 @@
         system = "x86_64-linux";
         maxJobs = 100;
         supportedFeatures = [ "benchmark" "big-parallel" ];
-        # It's best practice to handle SSH user and key via ~/.ssh/config
       }
     ];
-    # Enable experimental features for flakes
     settings.experimental-features = [ "nix-command" "flakes" ];
   };
   
@@ -68,8 +67,7 @@
   i18n.defaultLocale = "en_CA.UTF-8";
   time.timeZone = "America/Moncton";
 
-  # Enable hardware features. nixos-hardware module handles most of this,
-  # but explicit enabling is fine.
+  # Hardware features (nixos-hardware handles most of this)
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   hardware.enableRedistributableFirmware = true;
