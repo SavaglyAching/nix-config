@@ -42,8 +42,7 @@
   ];
 
   # Explicitly enable surface-control tools (good practice)
-  # This is handled by the nixos-hardware module, but being explicit is clear.
-  hardware.microsoft-surface.surface-control.enable = true;
+ 
   
   # Remote builder with improved security
   nix = {
