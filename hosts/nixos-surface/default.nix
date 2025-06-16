@@ -72,8 +72,7 @@
   hardware.bluetooth.enable = true;
   hardware.enableRedistributableFirmware = true;
   hardware.microsoft-surface.kernelVersion = "stable";
-  config.microsoft-surface.surface-control.enable = true;
-  microsoft-surface.ipts.enable = true;
+  
   # Enable Waydroid for Android app support
   virtualisation.waydroid.enable = true;
 
