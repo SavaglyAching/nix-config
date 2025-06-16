@@ -12,7 +12,8 @@
     ../../modules/system/nix.nix
     ../../modules/system/remote-builder.nix
     
-    # Use KDE Plasma - CORRECTED
+    ## Desktop environment (choose one)
+
     ../../modules/desktop/gnome.nix # Make sure this path points to your KDE Plasma module
     
     # Services

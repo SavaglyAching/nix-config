@@ -13,6 +13,7 @@
       tmux
       mosh
       sops
+      neofetch
       age
 
       # System administration
