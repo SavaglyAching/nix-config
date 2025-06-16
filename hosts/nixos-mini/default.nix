@@ -29,7 +29,7 @@
   networking.hostName = "nixos-mini";
   networking.networkmanager.enable = true;
 
-
+  
   # /etc/nixos/configuration.nix2
 
 

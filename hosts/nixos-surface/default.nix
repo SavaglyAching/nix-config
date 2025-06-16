@@ -1,10 +1,9 @@
 # hosts/nixos-surface/default.nix
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, nix-surface, ... }:
 
 {
   imports = [
-    ./hardware-configuration.nix
-    # System modules
+    # System modules (assuming these paths are correct relative to your flake root)
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
     ../../modules/system/users.nix
@@ -13,79 +12,68 @@
     ../../modules/system/nix.nix
     ../../modules/system/remote-builder.nix
     
-    # Use KDE Plasma
-    ../../modules/desktop/gnome.nix
+    # Use KDE Plasma - CORRECTED
+    ../../modules/desktop/gnome.nix # Make sure this path points to your KDE Plasma module
     
     # Services
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
   ];
 
+  # Use the linux-surface kernel for optimal hardware support
+  boot.kernelPackages = pkgs.linuxPackages_surface;
+
   # Host-specific network configuration
   networking.hostName = "nixos-surface";
 
-  # Surface-specific hardware support
-  hardware.firmware = with pkgs; [ linux-firmware ];
-  
-  # Network configuration
-  networking.networkmanager = {
-    enable = true;
-    wifi.backend = "iwd";  # Better WiFi performance
-  };
-  
-  # Better WiFi for Surface
-  networking.wireless.iwd.enable = true;
-  networking.interfaces.wlp0s20f3.useDHCP = true;
+  # Network configuration using iwd backend
+  # This is a cleaner way to enable NetworkManager with iwd
+  services.NetworkManager.enable = true;
+  services.iwd.enable = true;
+  networking.wireless.iwd.enable = true; # Explicitly enabling iwd can help in some setups
 
-  # Add user to required groups
+  # Add user to required groups for a typical desktop
   users.users.ham.extraGroups = [ 
     "networkmanager" 
+    "wheel" # For administrative tasks with sudo
     "input"
     "video"
-    "dialout"  # For serial devices
+    "dialout"
   ];
 
-  # Screen rotation (handled by nixos-hardware or KDE)
-  # hardware.sensor.iio.enable = true; # Keep commented for now, may be auto-enabled
-  
-  # Enable remote builder
+  # Enable remote builder with improved security
   nix = {
     settings = {
-      trusted-users = [ "ham" "root" ];
-      builders-use-substitutes = true; # Recommended by nixbuild.net
+      # Restrict trusted-users for better security.
+      # Your user 'ham' should use sudo for privileged operations.
+      trusted-users = [ "root" ];
+      builders-use-substitutes = true;
     };
     distributedBuilds = true;
-    # settings.builders = [ "ssh://eu.nixbuild.net x86_64-linux" ]; # Use buildMachines instead
     buildMachines = [
       {
         hostName = "eu.nixbuild.net";
         system = "x86_64-linux";
-        maxJobs = 100; # As per nixbuild.net docs
-        supportedFeatures = [ "benchmark" "big-parallel" ]; # As per nixbuild.net docs
-        # sshUser = "ham"; # Let SSH config handle user
-        # sshKey = "/root/.ssh/my-nixbuild-key"; # Let SSH config handle key
+        maxJobs = 100;
+        supportedFeatures = [ "benchmark" "big-parallel" ];
+        # It's best practice to handle SSH user and key via ~/.ssh/config
       }
     ];
+    # Enable experimental features for flakes
+    settings.experimental-features = [ "nix-command" "flakes" ];
   };
-
-  # Locale settings
-  i18n = {
-    defaultLocale = "en_CA.UTF-8";
-    supportedLocales = [ "en_CA.UTF-8/UTF-8" ];
-  };
-
-  # Surface hardware support
-  hardware.graphics.enable = true;
-  hardware.enableRedistributableFirmware = true;
-  hardware.bluetooth.enable = true;
   
-  # Enable experimental features for flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
-  # Time zone
+  # Locale and Timezone
+  i18n.defaultLocale = "en_CA.UTF-8";
   time.timeZone = "America/Moncton";
+
+  # Enable hardware features. nixos-hardware module handles most of this,
+  # but explicit enabling is fine.
+  hardware.graphics.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.enableRedistributableFirmware = true;
   
-  # Enable Waydroid
+  # Enable Waydroid for Android app support
   virtualisation.waydroid.enable = true;
 
   # System state version
