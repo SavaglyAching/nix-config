@@ -27,7 +27,8 @@
   networking.hostName = "nixos-surface";
 
   # Network configuration using iwd backend
-  services.NetworkManager.enable = true;
+  networking.networkmanager.enable = true;
+  networking.wireless.enable = true;
   services.iwd.enable = true;
   networking.wireless.iwd.enable = true;
 
