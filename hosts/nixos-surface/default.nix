@@ -80,5 +80,4 @@
   # System state version
 
   system.stateVersion = "24.11";
-};
 }
