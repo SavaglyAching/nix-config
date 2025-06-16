@@ -3,6 +3,7 @@
 
 {
   imports = [
+    ./hardware-configuration.nix
     # System modules (ensure these paths are correct)
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
@@ -75,5 +76,9 @@
   virtualisation.waydroid.enable = true;
 
   # System state version
+fileSystems."/" = {
+    device = "/dev/disk/by-uuid/YOUR_ROOT_UUID"; # &lt;--- Replace with your root partition UUID
+    fsType = "ext4";
+  };
   system.stateVersion = "24.11";
 }
