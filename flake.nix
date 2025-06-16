@@ -49,7 +49,7 @@
 
           # 2. The module for the Surface Pro 7 from nixos-hardware.
           # This single line handles the kernel, firmware, and other settings.
-          nixos-hardware.nixosModules.microsoft-surface-pro-7
+          nixos-hardware.nixosModules.microsoft-surface-pro-intel
         ];
       };
     };
