@@ -28,8 +28,7 @@
 
   # Network configuration using iwd backend
   networking.networkmanager.enable = true;
-  networking.wireless.enable = true;
-  services.iwd.enable = true;
+#  networking.wireless.enable = true;
   networking.wireless.iwd.enable = true;
 
   # Add user to required groups
