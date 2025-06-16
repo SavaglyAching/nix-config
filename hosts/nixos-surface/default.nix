@@ -28,7 +28,7 @@
   networking.hostName = "nixos-surface";
 
   # Network configuration using iwd backend
-  networking.networkmanager.enable = true;
+ 
 #  networking.wireless.enable = true;
   networking.wireless.iwd.enable = true;
 
@@ -71,7 +71,9 @@
   hardware.graphics.enable = true;
   hardware.bluetooth.enable = true;
   hardware.enableRedistributableFirmware = true;
-  
+  hardware.microsoft-surface.kernelVersion = "stable";
+  config.microsoft-surface.surface-control.enable = true;
+  microsoft-surface.ipts.enable = true;
   # Enable Waydroid for Android app support
   virtualisation.waydroid.enable = true;
 
