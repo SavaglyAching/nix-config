@@ -3,6 +3,8 @@
 {
   networking = {
  
+    nameservers = [ "100.100.100.100" "9.9.9.9" ];
+
     firewall = {
       enable = true;
       allowedTCPPorts = [ 22 ]; # Allow SSH
