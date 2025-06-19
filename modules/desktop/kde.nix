@@ -6,12 +6,9 @@
   services.desktopManager.plasma6.enable = true;
 
   environment.systemPackages = with pkgs; [
-    maliit-keyboard
     librewolf
     vscode-fhs
+    spotify
   ];
 
-  environment.sessionVariables = {
-    QT_IM_MODULE = "maliit";
-  };
 }
