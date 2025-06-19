@@ -1,7 +1,7 @@
 { lib, config, pkgs, unstable, ... }:
 
 let
-  smbServerIP = "192.168.2.88";
+  smbServerIP = "cloud";
   smbCredentialsFile = "/run/secrets/smb-credentials-file";
 
   # Define all the shares you want to mount in this list
