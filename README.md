@@ -111,3 +111,5 @@ To customize the home manager configuration:
 
 1. Edit the appropriate file under `home/`
 2. Rebuild the system to apply changes
+
+
