@@ -68,6 +68,7 @@
           inherit inputs;
         };
         modules = [
+          sops-nix.nixosModules.sops
           ./hosts/nixos-surface
           nixos-hardware.nixosModules.microsoft-surface-pro-intel
         ];
