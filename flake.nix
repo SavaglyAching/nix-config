@@ -34,12 +34,16 @@
 
       "nixos-rica" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/nixos-rica ];
+        modules = [ ./hosts/nixos-rica
+        sops-nix.nixosModules.sops # This line enables the `sops` option
+         ];
       };
 
       "nixos-mini" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/nixos-mini ];
+        modules = [ ./hosts/nixos-mini
+        sops-nix.nixosModules.sops # This line enables the `sops` option
+         ];
       };
 
       "nixos-mini-vm" = nixpkgs.lib.nixosSystem {
