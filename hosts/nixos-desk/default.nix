@@ -17,7 +17,7 @@
     ../../modules/services/ollama.nix
     ../../modules/services/docker.nix
     ../../modules/gaming/gaming.nix
-    ../../modules/system/sops.nix
+    ../../modules/system/sops-smb.nix
   ];
   # Host-specific network configuration
   networking.hostName = "nixos-desk";

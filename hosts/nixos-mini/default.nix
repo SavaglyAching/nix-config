@@ -10,7 +10,7 @@
     ../../modules/system/shell.nix
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
-    ../../modules/system/smb.nix
+    ../../modules/system/sops-smb.nix
 
     # Desktop environment (choose one)
     # ../../modules/desktop/kde.nix

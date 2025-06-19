@@ -33,7 +33,7 @@
   programs.gamemode.enable = true;
 
   # Add ROCm packages for GPU compute
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.graphics.extraPackages = with pkgs; [
    # rocm-opencl-icd
   ];
   
