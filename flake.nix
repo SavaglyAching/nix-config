@@ -41,9 +41,15 @@
 
       "nixos-mini" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/nixos-mini
-        sops-nix.nixosModules.sops # This line enables the `sops` option
-         ];
+        # --- ADDED: specialArgs to pass unstable packages to your config ---
+        specialArgs = {
+          unstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
+        };
+        # --- UPDATED: Added the sops-nix module ---
+        modules = [
+          ./hosts/nixos-mini
+          sops-nix.nixosModules.sops # This line enables the `sops` option
+        ];
       };
 
       "nixos-mini-vm" = nixpkgs.lib.nixosSystem {
