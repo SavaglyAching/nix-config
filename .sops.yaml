@@ -1,7 +1,7 @@
-# This file tells sops how to encrypt/decrypt files in this repository.
+# .sops.yaml
 creation_rules:
-  # Encrypt any file named 'secrets.yaml' or ending in '.secrets.yaml'
-  # using the age public key of our NixOS machine.
   - path_regex: secrets.yaml$
-    # Replace the key below with the age public key you generated in Step 1.
-    age: age1022792u83cdvh97ffdq62826txxfsgpjpad7mvg92v2wsthuhumshjfu80
+    key_groups:
+      - age:
+          - "age1022792u83cdvh97ffdq62826txxfsgpjpad7mvg92v2wsthuhumshjfu80" # Paste your converted age public key here
+          - "age1q08etu0wn6zmtjxfk3ycl4675raa7c27vhya3qjm0fh7tm0gkc7sfru4cl"

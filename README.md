@@ -113,3 +113,9 @@ To customize the home manager configuration:
 2. Rebuild the system to apply changes
 
 
+
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+IGNORE_WHEN_COPYING_END
