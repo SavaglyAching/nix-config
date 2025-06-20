@@ -18,6 +18,7 @@
     ../../modules/services/docker.nix
     ../../modules/gaming/gaming.nix
     ../../modules/system/sops-smb.nix
+    ../../modules/system/desktop.nix
   ];
   # Host-specific network configuration
   networking.hostName = "nixos-desk";

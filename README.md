@@ -113,9 +113,16 @@ To customize the home manager configuration:
 2. Rebuild the system to apply changes
 
 
+  environment.systemPackages = [
+    pkgs.aider-chat-with-playwright
+  ];
 
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-IGNORE_WHEN_COPYING_END
+  # Correct sops configuration
+  sops = {
+    defaultSopsFile = ../../secrets.yaml;
+    secrets.openrouter_api_key = {
+      # This makes the secret available at /run/secrets/openrouter_api_key
+      # and creates a NixOS option config.sops.secrets.openrouter_api_key.path
+      # to refer to its runtime path.
+    };
+  };

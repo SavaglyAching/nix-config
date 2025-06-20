@@ -2,28 +2,13 @@
 
 {
   # Shell and Terminal Configuration
-  environment.systemPackages = [
-    pkgs.aider-chat-with-playwright
-  ];
 
-  # Correct sops configuration
-  sops = {
-    defaultSopsFile = ../../secrets.yaml;
-    secrets.openrouter_api_key = {
-      # This makes the secret available at /run/secrets/openrouter_api_key
-      # and creates a NixOS option config.sops.secrets.openrouter_api_key.path
-      # to refer to its runtime path.
-    };
-  };
 
   programs = {
     zsh = {
       enable = true;
       # Use shellInit to set environment variables at Zsh startup
       # This runs before ~/.zshrc
-      shellInit = ''
-        export OPENROUTER_API_KEY="$(<${config.sops.secrets.openrouter_api_key.path})"
-      '';
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;

@@ -1,0 +1,12 @@
+{ config, lib, pkgs, ... }:
+
+{
+
+  environment.systemPackages = with pkgs; [
+    librewolf
+    vscode-fhs
+    spotify
+    stremio
+  ];
+
+}
