@@ -126,3 +126,6 @@ To customize the home manager configuration:
       # to refer to its runtime path.
     };
   };
+
+
+  # :)
