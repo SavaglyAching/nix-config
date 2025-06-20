@@ -28,9 +28,10 @@
   networking.hostName = "nixos-surface";
 
   # Network configuration using iwd backend
- 
-#  networking.wireless.enable = true;
-  networking.wireless.iwd.enable = true;
+    networking.networkmanager.enable = true;
+    networking.networkmanager.iwd.enable = true;
+  
+
 
   # Add user to required groups
   users.users.ham.extraGroups = [ 
@@ -54,7 +55,7 @@
     distributedBuilds = true;
     buildMachines = [
       {
-        hostName = "nixos-desk";
+        hostName = "100.71.107.77";
         system = "x86_64-linux";
         maxJobs = 100;
         supportedFeatures = [ "benchmark" "big-parallel" ];
