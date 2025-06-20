@@ -25,8 +25,6 @@
         lzd = "lazydocker";
         lzg = "lazygit";
         # System monitoring
-        htop = "btop";
-        df = "ncdu";
         yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 90";
         # Misc
         miniterm = "bash /scripts/terminal.sh";

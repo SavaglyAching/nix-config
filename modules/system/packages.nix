@@ -28,6 +28,7 @@
       fzf
       ripgrep
       fd
+      nnn
       tree
       
       # Development tools
