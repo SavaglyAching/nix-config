@@ -11,7 +11,7 @@
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/sops-smb.nix
-
+    ../../modules/system/getbuilt.nix
     # Desktop environment (choose one)
     # ../../modules/desktop/kde.nix
     
@@ -20,6 +20,7 @@
     ../../modules/services/tailscale.nix
     # ../../modules/services/ollama.nix
     ../../modules/services/docker.nix
+    
   ];
 
   boot.loader.systemd-boot.enable = true;
