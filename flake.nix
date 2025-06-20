@@ -65,11 +65,19 @@
       "nixos-surface" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit inputs;
+          # If you need packages from nixpkgs-unstable in your surface configuration,
+          # pass them explicitly, just like in your other hosts.
+          unstable = nixpkgs-unstable.legacyPackages."x86_64-linux";
         };
         modules = [
-          sops-nix.nixosModules.sops
+          # Your machine-specific configurations come first
           ./hosts/nixos-surface
+
+          # Then, add modules for additional functionality like sops
+          sops-nix.nixosModules.sops
+
+          # Finally, the hardware module. This is critical for Wi-Fi.
+          # It provides the necessary kernel, modules, and firmware.
           nixos-hardware.nixosModules.microsoft-surface-pro-intel
         ];
       };

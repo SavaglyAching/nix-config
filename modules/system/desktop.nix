@@ -7,6 +7,8 @@
     vscode-fhs
     spotify
     stremio
+    obs-studio
+    vlc
   ];
 
 }
