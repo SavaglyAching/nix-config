@@ -8,6 +8,7 @@
     spotify
     stremio
     obsidian
+    warp-terminal
   
   ];
 
