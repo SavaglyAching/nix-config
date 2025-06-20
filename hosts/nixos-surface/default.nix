@@ -29,9 +29,10 @@
 
   # Network configuration using iwd backend
     networking.networkmanager.enable = true;
-    networking.networkmanager.iwd.enable = true;
+   
   
-
+  #  networking.wireless.enable = true;
+  networking.wireless.iwd.enable = false;
 
   # Add user to required groups
   users.users.ham.extraGroups = [ 
