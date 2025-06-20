@@ -7,6 +7,10 @@
     vscode-fhs
     spotify
     stremio
+    obsidian
+  
   ];
+
+  services.flatpak.enable = true;
 
 }

@@ -56,7 +56,9 @@
     distributedBuilds = true;
     buildMachines = [
       {
-        hostName = "100.71.107.77";
+        hostName = "nixos-desk";
+        sshUser = "root";
+        sshKey = "/root/.ssh/id_ed25519";
         system = "x86_64-linux";
         maxJobs = 100;
         supportedFeatures = [ "benchmark" "big-parallel" ];
