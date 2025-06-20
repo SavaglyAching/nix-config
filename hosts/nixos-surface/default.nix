@@ -54,7 +54,7 @@
     distributedBuilds = true;
     buildMachines = [
       {
-        hostName = "eu.nixbuild.net";
+        hostName = "nixos-desk";
         system = "x86_64-linux";
         maxJobs = 100;
         supportedFeatures = [ "benchmark" "big-parallel" ];
