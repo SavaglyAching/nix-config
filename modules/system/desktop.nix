@@ -9,7 +9,7 @@
     stremio
     obsidian
     warp-terminal
-  
+    vlc
   ];
 
   services.flatpak.enable = true;
