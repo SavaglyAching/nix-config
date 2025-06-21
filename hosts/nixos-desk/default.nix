@@ -22,7 +22,8 @@
   ];
   # Host-specific network configuration
   networking.hostName = "nixos-desk";
-            
+  
+  services.tailscale.useRoutingFeatures = "client";
   hardware.bluetooth.enable = true;
   time.timeZone = "America/Moncton";
   # Ensure ham is a trusted user for Nix operations, which is required for remote building.

@@ -1,9 +1,24 @@
 { config, lib, pkgs, ... }:
 
 {
-  networking = {
+
+ services.resolved = {
+   enable = true;
+   fallbackDns = [ "194.242.2.5" ];
+   domains = [ "~." ];
+
+   # Enable DNS-over-TLS (DoT)
+   # "opportunistic" will try to use DoT and fall back to unencrypted DNS if not supported.
+   # Set to "true" or "yes" to enforce DoT.
+    dnsovertls = "true";
+
+   # Enable DNSSEC validation
+   # "allow-downgrade" will perform validation only if the upstream server supports it.
+    dnssec = "allow-downgrade";
+    };
+ networking = {
  
-    nameservers = [ "100.100.100.100" "9.9.9.9" ];
+    nameservers = [ "194.242.2.5" "100.100.100.100"  ];
 
     firewall = {
       enable = true;
