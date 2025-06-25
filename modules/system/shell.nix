@@ -27,6 +27,8 @@
         # System monitoring
         htop = "btop";
         df = "ncdu";
+        ttdl = "yt-dlp -o '%(upload_date)s - %(title)s by %(uploader)s.%(ext)s' -a /home/ham/ttdl/urls.txt --download-archive /home/ham/ttdl/archive.txt";
+
         yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 90";
         # Misc
         miniterm = "bash /scripts/terminal.sh";
