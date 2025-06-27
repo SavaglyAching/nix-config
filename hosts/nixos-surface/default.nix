@@ -13,8 +13,8 @@
     ../../modules/system/nix.nix
     ../../modules/system/remote-builder.nix
     
-    # Use KDE Plasma - ensure this points to your KDE module
-    ../../modules/desktop/kde.nix
+
+    ../../modules/desktop/gnome.nix
     
     # Services
     ../../modules/services/ssh.nix
@@ -28,11 +28,9 @@
   networking.hostName = "nixos-surface";
 
   # Network configuration using iwd backend
-    networking.networkmanager.enable = true;
+  networking.networkmanager.enable = true;
    
-  
-  #  networking.wireless.enable = true;
-  networking.wireless.iwd.enable = false;
+ 
 
   # Add user to required groups
   users.users.ham.extraGroups = [ 

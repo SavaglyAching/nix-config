@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
+#backup of fresh surface install
 { config, pkgs, ... }:
 
 {
@@ -26,22 +26,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  nix = {
-    settings = {
-      trusted-users = [ "root" ];
-      builders-use-substitutes = true;
-    };
-    distributedBuilds = true;
-    buildMachines = [
-      {
-        hostName = "100.71.107.77";
-        system = "x86_64-linux";
-        maxJobs = 100;
-        supportedFeatures = [ "benchmark" "big-parallel" ];
-      }
-    ];
-    settings.experimental-features = [ "nix-command" "flakes" ];
-  };
+
   # Set your time zone.
   time.timeZone = "America/Moncton";
 
