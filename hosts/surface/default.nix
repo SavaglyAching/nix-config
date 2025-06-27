@@ -1,4 +1,4 @@
-# hosts/nixos-surface/default.nix
+# hosts/surface/default.nix
 { config, lib, pkgs, inputs, ... }:
 
 {
@@ -25,7 +25,7 @@
   # boot.kernelPackages = pkgs.linuxPackages_surface;
 
   # Host-specific network configuration
-  networking.hostName = "nixos-surface";
+  networking.hostName = "surface";
 
   # Network configuration using iwd backend
   networking.networkmanager.enable = true;

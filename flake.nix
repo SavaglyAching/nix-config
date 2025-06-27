@@ -62,7 +62,7 @@
         modules = [ ./hosts/nixos-vm ];
       };
 
-      "nixos-surface" = nixpkgs.lib.nixosSystem {
+      "surface" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           # If you need packages from nixpkgs-unstable in your surface configuration,
@@ -71,7 +71,7 @@
         };
         modules = [
           # Your machine-specific configurations come first
-          ./hosts/nixos-surface
+          ./hosts/surface
 
           # Then, add modules for additional functionality like sops
           sops-nix.nixosModules.sops
