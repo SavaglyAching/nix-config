@@ -4,7 +4,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    # System modules (ensure these paths are correct)
+    # System modules (ensure these paths are correct) yay
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
     ../../modules/system/users.nix
