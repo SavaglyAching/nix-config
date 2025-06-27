@@ -12,7 +12,7 @@
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/remote-builder.nix
-    
+    ../../modules/system/desktop.nix
 
     ../../modules/desktop/gnome.nix
     

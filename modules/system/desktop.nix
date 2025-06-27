@@ -8,10 +8,7 @@
     stremio
     obs-studio
     vlc
-    playwright
-    windsurf
     signal-desktop
-    vdhcoapp
     brave
   ];
 }
