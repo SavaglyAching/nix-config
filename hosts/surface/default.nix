@@ -48,7 +48,7 @@
   # Remote builder with improved security
   nix = {
     settings = {
-      trusted-users = [ "root" ];
+      trusted-users = [ "root" "ham" ];
       builders-use-substitutes = true;
     };
     distributedBuilds = true;
