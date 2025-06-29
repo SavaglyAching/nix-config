@@ -12,10 +12,14 @@
     # --- ADDED: unstable input for the latest sops tool ---
     # Your configuration.nix refers to `unstable.sops`, so this is required.
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    # --- ADDED: home-manager input ---
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # --- UPDATED: Add sops-nix and nixpkgs-unstable to function arguments ---
-  outputs = { self, nixpkgs, nixos-hardware, sops-nix, nixpkgs-unstable, ... }@inputs: {
+  outputs = { self, nixpkgs, nixos-hardware, sops-nix, nixpkgs-unstable, home-manager, ... }@inputs: {
     nixosConfigurations = {
       # --- Your Other Host Configurations ---
 
@@ -29,6 +33,7 @@
         modules = [
           ./hosts/nixos-desk
           sops-nix.nixosModules.sops # This line enables the `sops` option
+          home-manager.nixosModules.home-manager
         ];
       };
 
@@ -36,8 +41,10 @@
         system = "x86_64-linux";
         modules = [ ./hosts/nixos-rica
         sops-nix.nixosModules.sops # This line enables the `sops` option
-         ];
-      };
+        home-manager.nixosModules.home-manager
+      home-manager.nixosModules.home-manager
+      ];
+    };
 
       "nixos-mini" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -49,17 +56,24 @@
         modules = [
           ./hosts/nixos-mini
           sops-nix.nixosModules.sops # This line enables the `sops` option
+          home-manager.nixosModules.home-manager
         ];
       };
 
       "nixos-mini-vm" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/nixos-mini-vm ];
+        modules = [
+          ./hosts/nixos-mini-vm
+          home-manager.nixosModules.home-manager
+        ];
       };
 
       "nixos-vm" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/nixos-vm ];
+        modules = [
+          ./hosts/nixos-vm
+          home-manager.nixosModules.home-manager
+        ];
       };
 
       "surface" = nixpkgs.lib.nixosSystem {
@@ -75,6 +89,7 @@
 
           # Then, add modules for additional functionality like sops
           sops-nix.nixosModules.sops
+          home-manager.nixosModules.home-manager
 
           # Finally, the hardware module. This is critical for Wi-Fi.
           # It provides the necessary kernel, modules, and firmware.

@@ -1,14 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Shell and Terminal Configuration
-
-
   programs = {
     zsh = {
       enable = true;
-      # Use shellInit to set environment variables at Zsh startup
-      # This runs before ~/.zshrc
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
       enableCompletion = true;

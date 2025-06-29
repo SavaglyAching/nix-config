@@ -14,7 +14,8 @@
     ../../modules/desktop/kde.nix
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
-    ../../modules/services/ollama.nix
+
+    
     ../../modules/services/docker.nix
     ../../modules/gaming/gaming.nix
     ../../modules/system/sops-smb.nix
@@ -46,4 +47,5 @@
   networking.networkmanager.enable = true;
   # System state version
   system.stateVersion = "24.11";
+  home-manager.users.ham = import ../../home/home.nix;
 }
