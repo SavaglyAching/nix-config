@@ -19,7 +19,6 @@
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
     # ../../modules/services/ollama.nix
-    ../../modules/services/docker.nix
     ../../modules/services/metube.nix
     ../../modules/services/ntfy.nix
   ];
