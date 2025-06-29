@@ -1,4 +1,6 @@
 {
+
+    virtualisation.oci-containers.enable = true;  
   virtualisation.oci-containers.containers."metube" = {
     image = "alextaaga/metube";
     ports = [ "8081:8081" ];
@@ -12,12 +14,11 @@
         no_part = true;
       };
       "DOWNLOAD_MODE" = "concurrent";
-      "NTFY_URL" = "http://cloud:80";
+      "NTFY_URL" = "http://localhost:6789";
       "NTFY_TOPIC" = "metube";
     };
     extraOptions = [ "--restart=unless-stopped" ];
   };
-{
   virtualisation.oci-containers.containers."ntfy" = {
     image = "binwiederhier/ntfy";
     ports = [ "6789:80" ];

@@ -22,7 +22,7 @@
     ../../modules/services/podman-mini.nix
   ];
 
-  virtualisation.oci-containers.enable = true;
+
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
