@@ -11,7 +11,7 @@
         no_part = true;
       };
       "DOWNLOAD_MODE" = "concurrent";
-      "NTFY_URL" = "http://100.105.83.87:6789";
+      "NTFY_URL" = "http://0.0.0.0:6789";
       "NTFY_TOPIC" = "metube";
     };
   };
