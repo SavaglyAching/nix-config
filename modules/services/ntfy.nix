@@ -3,7 +3,7 @@
     image = "binwiederhier/ntfy";
     ports = [ "6789:80" ];
     volumes = [
-      "/home/ham/ntfy/cache:/var/cache/ntfy",
+      "/home/ham/ntfy/cache:/var/cache/ntfy"
       "/home/ham/ntfy/config:/etc/ntfy"
     ];
     extraOptions = [
