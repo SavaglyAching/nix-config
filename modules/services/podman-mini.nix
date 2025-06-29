@@ -1,7 +1,6 @@
 {
   virtualisation.podman = {
     enable = true;
-    defaultNetwork.enable = true;
   };
 
   virtualisation.oci-containers.containers."ytptube" = {
