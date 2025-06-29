@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  
+  imports = [
+    ../../modules/services/podman-mini.nix
+  ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   security.rtkit.enable = true;
