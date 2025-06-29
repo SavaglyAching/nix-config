@@ -19,8 +19,7 @@
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
     # ../../modules/services/ollama.nix
-    ../../modules/services/metube.nix
-    ../../modules/services/ntfy.nix
+    ../../modules/services/podman-mini.nix
   ];
 
   virtualisation.oci-containers.enable = true;
