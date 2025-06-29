@@ -7,7 +7,7 @@
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
     ../../modules/system/users.nix
-    ../../modules/system/shell.nix
+    home-manager.users.ham = import ../../home/home.nix;
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/sops-smb.nix
