@@ -22,6 +22,8 @@
     ../../modules/services/docker.nix
     ../../modules/services/metube.nix
     ../../modules/services/ntfy.nix
+
+  virtualisation.oci-containers.enable = true;
   ];
 
   boot.loader.systemd-boot.enable = true;

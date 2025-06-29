@@ -1,5 +1,5 @@
 {
-  virtualisation.docker.containers."metube" = {
+  virtualisation.oci-containers.containers."metube" = {
     image = "arabcoders/ytptube";
     ports = [ "8081:8081" ];
     volumes = [ "/home/ham/metube-downloads:/downloads" ];

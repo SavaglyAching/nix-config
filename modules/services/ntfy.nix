@@ -1,5 +1,5 @@
 {
-  virtualisation.docker.containers."ntfy" = {
+  virtualisation.oci-containers.containers."ntfy" = {
     image = "binwiederhier/ntfy";
     ports = [ "6789:80" ];
     volumes = [
