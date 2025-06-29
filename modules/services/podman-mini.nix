@@ -1,6 +1,6 @@
 {
 
-    virtualisation.oci-containers.enable = true;  
+
   virtualisation.oci-containers.containers."metube" = {
     image = "alextaaga/metube";
     ports = [ "8081:8081" ];
