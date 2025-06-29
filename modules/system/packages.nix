@@ -15,6 +15,8 @@
       sops
       neofetch
       age
+      nodejs
+      gemini-cli
 
       # System administration
       btrfs-progs

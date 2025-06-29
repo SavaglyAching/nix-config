@@ -27,7 +27,7 @@
         # System monitoring
         htop = "btop";
         df = "ncdu";
-        yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 90";
+        yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 90 --no-part ";
         # Misc
         miniterm = "bash /scripts/terminal.sh";
       };

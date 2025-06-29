@@ -9,6 +9,5 @@
     obs-studio
     vlc
     signal-desktop
-    brave
   ];
 }
