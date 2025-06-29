@@ -4,7 +4,7 @@
   virtualisation.oci-containers.containers."ytptube" = {
     image = "ghcr.io/arabcoders/ytptube:latest";
     ports = [ "8081:8081" ];
-    volumes = [ "/home/ham/metube-downloads:/downloads" ];
+    volumes = [ "ytptube-data:/downloads" ];
     user = "1000:1000";
     environment = {
       "YTP_MAX_WORKERS" = "999"; # Effectively unlimited concurrent downloads
