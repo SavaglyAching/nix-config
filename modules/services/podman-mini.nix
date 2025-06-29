@@ -5,7 +5,7 @@
     image = "ghcr.io/arabcoders/ytptube:latest";
     ports = [ "8081:8081" ];
     volumes = [ "/home/ham/metube-downloads:/downloads" ];
-    user = "ham";
+    user = "1000:1000";
     environment = {
       "YTP_MAX_WORKERS" = "999"; # Effectively unlimited concurrent downloads
       "YTP_CONSOLE_ENABLED" = "true"; # Enable console
