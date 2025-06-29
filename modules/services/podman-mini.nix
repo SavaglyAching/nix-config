@@ -1,5 +1,8 @@
 {
-  virtualisation.podman.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    defaultNetwork.enable = true;
+  };
 
   virtualisation.oci-containers.containers."ytptube" = {
     image = "ghcr.io/arabcoders/ytptube:latest";
