@@ -9,5 +9,6 @@
     obs-studio
     vlc
     signal-desktop
+    scrcpy
   ];
 }

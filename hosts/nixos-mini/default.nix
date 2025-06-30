@@ -7,7 +7,7 @@
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
     ../../modules/system/users.nix
-    home-manager.users.ham = import ../../home/home.nix;
+    
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/sops-smb.nix
@@ -19,7 +19,8 @@
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
     # ../../modules/services/ollama.nix
-    ../../modules/services/podman-mini.nix
+    # ../../modules/services/podman-mini.nix
+    ../../home/home.nix # Home Manager configuration
   ];
 
 
@@ -47,4 +48,6 @@
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "24.11";
+
+  # home-manager.users.ham = import ../../home/home.nix;
 }

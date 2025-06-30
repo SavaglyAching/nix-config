@@ -39,10 +39,12 @@
 
       "nixos-rica" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {
+          home-manager = home-manager;
+        };
         modules = [ ./hosts/nixos-rica
         sops-nix.nixosModules.sops # This line enables the `sops` option
         home-manager.nixosModules.home-manager
-      home-manager.nixosModules.home-manager
       ];
     };
 
@@ -60,21 +62,27 @@
         ];
       };
 
-      "nixos-mini-vm" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/nixos-mini-vm
-          home-manager.nixosModules.home-manager
-        ];
-      };
+      # "nixos-mini-vm" = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   specialArgs = {
+      #     home-manager = home-manager;
+      #   };
+      #   modules = [
+      #     ./hosts/nixos-mini-vm
+      #     home-manager.nixosModules.home-manager
+      #   ];
+      # };
 
-      "nixos-vm" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/nixos-vm
-          home-manager.nixosModules.home-manager
-        ];
-      };
+      # "nixos-vm" = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   specialArgs = {
+      #     home-manager = home-manager;
+      #   };
+      #   modules = [
+      #     ./hosts/nixos-vm
+      #     home-manager.nixosModules.home-manager
+      #   ];
+      # };
 
       "surface" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

@@ -8,7 +8,7 @@
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
     ../../modules/system/users.nix
-    ../../modules/system/shell.nix
+    # ../../modules/system/shell.nix
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/remote-builder.nix
@@ -19,6 +19,7 @@
     # Services
     ../../modules/services/ssh.nix
     ../../modules/services/tailscale.nix
+    ../../home/home.nix # Home Manager configuration
   ];
 
   # REMOVED: This is now handled by nixos-hardware and must be removed.

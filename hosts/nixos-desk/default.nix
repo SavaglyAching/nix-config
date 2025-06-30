@@ -3,10 +3,10 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../home/home.nix
     ../../modules/system/boot.nix
     ../../modules/system/network.nix
     ../../modules/system/users.nix
-    ../../modules/system/shell.nix
     ../../modules/system/packages.nix
     ../../modules/system/nix.nix
     ../../modules/system/btrfs.nix
@@ -38,7 +38,7 @@
 
   # Host-specific network configuration
   networking.hostName = "nixos-desk";
-  
+  networking.interfaces.enp14s0.wakeOnLan.enable = true;
   services.tailscale.useRoutingFeatures = "client";
   hardware.bluetooth.enable = true;
   time.timeZone = "America/Moncton";
@@ -47,5 +47,4 @@
   networking.networkmanager.enable = true;
   # System state version
   system.stateVersion = "24.11";
-  home-manager.users.ham = import ../../home/home.nix;
 }

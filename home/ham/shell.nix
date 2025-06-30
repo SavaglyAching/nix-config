@@ -36,6 +36,6 @@
       ];
     };
 
-    mosh.enable = true;
+    
   };
 }
