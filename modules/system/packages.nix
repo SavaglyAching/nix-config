@@ -17,6 +17,7 @@
       age
       nodejs
       gemini-cli
+      claude-code
 
       # System administration
       btrfs-progs
