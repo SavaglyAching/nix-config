@@ -26,11 +26,14 @@
     ./programs/starship.nix
     # Desktop environments imported by system-level desktop configs
     #./programs/hyprland/default.nix
-    ./programs/niri/default.nix
+    #./programs/niri/default.nix
     #./programs/xfce.nix
 
     # Desktop packages imported conditionally by desktop modules
     # ./desktop-packages.nix
+  ] ++ lib.optionals (osConfig.services.xserver.enable or false) [
+    # Only import graphical/desktop programs on systems with X11/Wayland
+    ./programs/niri/default.nix
   ];
 
   # Set the home-manager state version
