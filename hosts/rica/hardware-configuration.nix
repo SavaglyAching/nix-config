@@ -6,7 +6,14 @@
 {
   imports = [ ];
 
-  boot.initrd.availableKernelModules = [ ];
+  boot.initrd.availableKernelModules = [
+    # Xen virtual device drivers (for xvda devices)
+    "xen_blkfront"
+    # Also include virtio in case provider switched to KVM
+    "virtio_pci"
+    "virtio_blk"
+    "virtio_scsi"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
