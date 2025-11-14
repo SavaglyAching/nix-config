@@ -66,7 +66,7 @@ umount -R "$MOUNT_POINT" 2>/dev/null || true
 # Mount BTRFS root
 echo -e "\n${YELLOW}Mounting BTRFS root...${NC}"
 mkdir -p "$MOUNT_POINT"
-mount -o subvol=@ "$BTRFS_DEVICE" "$MOUNT_POINT" || mount "$BTRFS_DEVICE" "$MOUNT_POINT"
+mount -o subvol=@root "$BTRFS_DEVICE" "$MOUNT_POINT"
 echo -e "${GREEN}Mounted root at $MOUNT_POINT${NC}"
 
 # Mount BTRFS subvolumes if they exist
