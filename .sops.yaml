@@ -1,0 +1,10 @@
+# .sops.yaml
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+      - age:
+          - "age1022792u83cdvh97ffdq62826txxfsgpjpad7mvg92v2wsthuhumshjfu80" # Paste your converted age public key here
+          - "age1q08etu0wn6zmtjxfk3ycl4675raa7c27vhya3qjm0fh7tm0gkc7sfru4cl"
+          - "age15dvncqpg0vc64w70euqq7jam6e0zjla8sak88h6lvyvp29t6tslqzw734a"
+          - "age1ptkv5a9sz55ldrvf6ehgukwx9j0pdgymfkp5lr96e0fc5kuf9ersajgzaw"
+          - "age1derdkktgama7f37ngk5fzv4x0l5qmap820xhxp6fx4rr20wzvgyswysgzn" # installer
