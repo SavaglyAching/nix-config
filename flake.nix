@@ -120,10 +120,17 @@
       # ISO image outputs
       packages.${system} = {
         surface-iso = nixosConfigs.surface-installer.config.system.build.isoImage;
+        # System builds
+        desk = nixosConfigs.desk.config.system.build.toplevel;
+        rica = nixosConfigs.rica.config.system.build.toplevel;
+        mini = nixosConfigs.mini.config.system.build.toplevel;
+        surface = nixosConfigs.surface.config.system.build.toplevel;
       };
 
       packages."aarch64-linux" = {
         asahi-iso = nixosConfigs.asahi-installer.config.system.build.isoImage;
+        # System build
+        asahi = nixosConfigs.asahi.config.system.build.toplevel;
       };
     };
 }

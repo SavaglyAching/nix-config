@@ -46,6 +46,11 @@
         group = "users";
         mode = "0400";
       };
+      PERPLEXITY_API_KEY = {
+        owner = "ham";
+        group = "users";
+        mode = "0400";
+      };
 
       # Karakeep secrets
       "karakeep_secrets/meili_master_key" = {

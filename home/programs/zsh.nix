@@ -76,10 +76,10 @@
           export DISPLAY=:0
         fi
 
-        # Source SOPS environment variables for API keys
-        if [ -f /run/secrets/openrouter.env ]; then
-          source /run/secrets/openrouter.env
-        fi
+        # Export API keys from SOPS secrets
+        [ -f /run/secrets/OPENROUTER_API_KEY ] && export OPENROUTER_API_KEY=$(cat /run/secrets/OPENROUTER_API_KEY)
+        [ -f /run/secrets/GEMINI_API_KEY ] && export GEMINI_API_KEY=$(cat /run/secrets/GEMINI_API_KEY)
+        [ -f /run/secrets/PERPLEXITY_API_KEY ] && export PERPLEXITY_API_KEY=$(cat /run/secrets/PERPLEXITY_API_KEY)
 
         # Moose greeting
         fortune | cowsay -r | lolcat
