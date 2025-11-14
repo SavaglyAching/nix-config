@@ -12,8 +12,8 @@
     disk = {
       main = {
         type = "disk";
-        # Device is specified at installation time via disko script
-        device = "/dev/disk/by-id/some-disk-id";
+        # NVMe SSD on Surface Pro
+        device = "/dev/disk/by-id/nvme-HFB1M8MQ331C0MR_SAKCG05QB4008M87CC25";
         content = {
           type = "gpt";
           partitions = {
