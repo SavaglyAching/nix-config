@@ -63,6 +63,17 @@
         ];
         env = {};
       };
+
+      # Perplexity MCP Server - for AI-powered web search and research
+      # Note: Requires PERPLEXITY_API_KEY environment variable to be set in your shell
+      perplexity = {
+        type = "stdio";
+        command = "npx";
+        args = [
+          "-y"
+          "perplexity-mcp"
+        ];
+      };
     };
   };
 }
