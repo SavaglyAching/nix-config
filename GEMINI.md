@@ -1,0 +1,1 @@
+/home/ham/nix-config/CLAUDE.md

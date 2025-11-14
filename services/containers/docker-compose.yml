@@ -1,0 +1,11 @@
+services:
+  metube:
+    image: ghcr.io/alexta69/metube
+    container_name: metube
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - /home/ham/metube/videos:/downloads
+     environment:
+       - YTDL_OPTIONS="--retries infinite --fragment-retries infinite --socket-timeout 90 --no-part --downloader ffmpeg --hls-use-mpegts"
