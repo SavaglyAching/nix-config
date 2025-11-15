@@ -3,7 +3,6 @@
 
 {
   imports = [
-    ./disko.nix
     ../../common.nix
 
     # Host-specific modules
@@ -50,6 +49,7 @@
     settings = {
       trusted-users = [ "root" "ham" ];
       builders-use-substitutes = true;
+      trusted-substituters = [ "ssh://mini" ];
     };
     distributedBuilds = true;
     buildMachines = [{

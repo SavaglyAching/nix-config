@@ -13,7 +13,7 @@
       main = {
         type = "disk";
         # NVMe SSD on Surface Pro
-        device = "/dev/disk/by-id/nvme-HFB1M8MQ331C0MR_SAKCG05QB4008M87CC25";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
