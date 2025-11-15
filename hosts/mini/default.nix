@@ -14,6 +14,7 @@
     # Desktop environment (choose one)
     # ../../desktop/kde.nix
     ../../services/forgejo.nix
+    ../../services/nixbuild.nix
 
     # Services (uncomment as needed)
     # ../../services/ollama.nix
