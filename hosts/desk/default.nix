@@ -57,7 +57,14 @@
 
   # Enable building for ARM64 systems (e.g., asahi)
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  networking.networkmanager.enable = true;
+
+  # Network configuration using NetworkManager
+  # DNS handled by systemd-resolved (configured in system/network.nix)
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+  };
+
   # System state version
   system.stateVersion = "24.11";
 }

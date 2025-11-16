@@ -19,7 +19,11 @@
   nixpkgs.hostPlatform = "aarch64-linux";
 
   # Network configuration using NetworkManager
-  networking.networkmanager.enable = true;
+  # DNS handled by systemd-resolved (configured in system/network.nix)
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+  };
 
   # Asahi-specific hardware configuration
   hardware.asahi = {

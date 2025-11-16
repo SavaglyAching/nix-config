@@ -22,10 +22,11 @@
   networking.hostName = "surface";
 
   # Network configuration using NetworkManager
-  networking.networkmanager.enable = true;
-
-  # Default DNS servers (Mullvad DNS + Tailscale DNS)
-  networking.nameservers = [ "194.242.2.5" "100.100.100.100" ];
+  # DNS handled by systemd-resolved (configured in system/network.nix)
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+  };
 
   # Add user to required groups
   users.users.ham.extraGroups = [
