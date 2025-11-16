@@ -24,8 +24,14 @@
     let
       system = "x86_64-linux";
       specialArgs = {
-        unstable = import nixpkgs { inherit system; config.allowUnfree = true; };
-        stable = import nixpkgs-stable { inherit system; config.allowUnfree = true; };
+        unstable = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+        stable = import nixpkgs-stable {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
       };
       commonModules = [
         sops-nix.nixosModules.sops
@@ -119,7 +125,10 @@
 
       colmena = {
         meta = {
-          nixpkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
           specialArgs = specialArgs;
         };
 
