@@ -29,7 +29,7 @@ NixOS configuration using Nix Flakes, supporting multiple machines (desk, rica, 
 ## Hosts Overview
 - **desk**: Desktop workstation (KDE, gaming, Podman, remote builder, BTRFS, remote unlock, AMD GPU, Samba client+server)
 - **rica**: File server (Samba, Podman containers, remote desktop, BTRFS, Caddy reverse proxy, audiobookshelf)
-- **mini**: Minimal server (Podman with containers only - karakeep, remote desktop, borgbackup)
+- **mini**: Deployment manager (Colmena, Podman containers - karakeep, remote desktop, borgbackup, Forgejo)
 - **surface**: Microsoft Surface Pro (GNOME, remote builder, Waydroid, nixos-hardware integration)
 
 ## Key Commands
@@ -60,6 +60,31 @@ nix fmt
 # Run garbage collection
 sudo nix-collect-garbage -d
 ```
+
+### Colmena Deployment (from mini)
+```bash
+# Deploy to all hosts
+colmena apply
+
+# Deploy to specific host(s)
+colmena apply --on desk
+colmena apply --on desk,rica
+
+# Build without deploying
+colmena build
+
+# Deploy locally (on the current host)
+colmena apply-local --sudo
+
+# Check what will be deployed
+colmena eval
+```
+
+**Colmena Configuration**:
+- Deploys via SSH as user `ham` (uses sudo for activation)
+- Uses Tailscale hostnames: desk, rica, mini, surface
+- Shares same modules as nixosConfigurations
+- Controlled from mini host (deployment manager)
 
 ### Package Search with nix-search-tv
 ```bash

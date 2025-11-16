@@ -22,6 +22,7 @@
 
       # System administration
       btrfs-progs
+      colmena
       dnsutils
       iotop
       nmap

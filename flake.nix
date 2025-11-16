@@ -117,6 +117,34 @@
     {
       nixosConfigurations = nixosConfigs;
 
+      colmena = {
+        meta.nixpkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+
+        defaults = {
+          deployment.targetUser = "ham";
+        };
+
+        desk = {
+          deployment.targetHost = "desk";
+          imports = [ ./hosts/desk ] ++ commonModules;
+        };
+
+        rica = {
+          deployment.targetHost = "rica";
+          imports = [ ./hosts/rica ] ++ commonModules;
+        };
+
+        mini = {
+          deployment.targetHost = "mini";
+          imports = [ ./hosts/mini ] ++ commonModules;
+        };
+
+        surface = {
+          deployment.targetHost = "surface";
+          imports = [ ./hosts/surface nixos-hardware.nixosModules.microsoft-surface-pro-intel ] ++ commonModules;
+        };
+      };
+
       # ISO image outputs
       packages.${system} = {
         surface-iso = nixosConfigs.surface-installer.config.system.build.isoImage;
