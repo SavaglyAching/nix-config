@@ -118,7 +118,10 @@
       nixosConfigurations = nixosConfigs;
 
       colmena = {
-        meta.nixpkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+        meta = {
+          nixpkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+          specialArgs = specialArgs;
+        };
 
         defaults = {
           deployment.targetUser = "ham";

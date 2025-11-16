@@ -4,7 +4,7 @@
 {
   imports = [
     ../../common.nix
-
+    ./hardware-configuration.nix
     # Host-specific modules
     ../../system/remote-builder.nix
     ../../system/wifi.nix
@@ -12,8 +12,7 @@
     # ../../desktop/niri.nix  # Uncomment to try the Niri Wayland session (touch-friendly scrollable tiling)
 
     # ../../system/shell.nix
-  ] ++ (lib.optional (builtins.pathExists ./hardware-configuration.nix) ./hardware-configuration.nix);
-
+  ];
 
   # REMOVED: This is now handled by nixos-hardware and must be removed.
   # boot.kernelPackages = pkgs.linuxPackages_surface;
