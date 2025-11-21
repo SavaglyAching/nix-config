@@ -285,6 +285,9 @@ layout {
 // Waybar is started by Home Manager systemd service, no need to spawn here.
 // spawn-at-startup "waybar"
 
+// XWayland support for legacy X11 applications (Steam, etc.)
+spawn-at-startup "xwayland-satellite"
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 

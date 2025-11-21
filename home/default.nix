@@ -31,8 +31,8 @@
 
     # Desktop packages imported conditionally by desktop modules
     # ./desktop-packages.nix
-  ] ++ lib.optionals (osConfig.services.xserver.enable or false) [
-    # Only import graphical/desktop programs on systems with X11/Wayland
+
+    # Niri/Wayland configuration (packages are conditional inside wayland/default.nix)
     ./programs/niri/default.nix
   ];
 

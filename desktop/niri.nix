@@ -12,6 +12,11 @@ let
   tuigreetCmd = command: "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${command}";
 in
 {
+  # System packages required for Niri
+  environment.systemPackages = with pkgs; [
+    xwayland-satellite # XWayland support for legacy X11 apps (Steam, etc.)
+  ];
+
   # Import desktop packages (only available on x86_64-linux)
   home-manager.users.ham = {
     imports = lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [

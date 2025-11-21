@@ -2,11 +2,12 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }:
 
 {
-  imports = [
+  imports = lib.optionals (osConfig.programs.niri.enable or false) [
     ./waybar.nix
     ./hypridle.nix
     ./walker.nix
@@ -14,12 +15,12 @@
     ../hyprpaper.nix
   ];
 
-  home.sessionVariables = {
+  home.sessionVariables = lib.mkIf (osConfig.programs.niri.enable or false) {
     XDG_SESSION_TYPE = "wayland";
   };
 
   # Common Wayland utilities for all compositors
-  home.packages = with pkgs; [
+  home.packages = lib.optionals (osConfig.programs.niri.enable or false) (with pkgs; [
     # Application launcher
     walker
 
@@ -44,5 +45,5 @@
     blueman # Bluetooth manager
     wlogout # Logout/power menu for Wayland
     nautilus # GNOME Files manager
-  ];
+  ]);
 }
