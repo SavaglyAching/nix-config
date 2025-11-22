@@ -69,6 +69,13 @@
         mode = "0400";
       };
 
+      # Open WebUI secret key
+      open-webui-secret-key = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
+
       # Borgbackup SSH authorized keys
       "authorized_keys/mac" = {
         owner = "root";
@@ -78,6 +85,13 @@
 
       # Wifi passwords
       "wifi/fly/password" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
+
+      # Attic binary cache token
+      attic_token = {
         owner = "root";
         group = "root";
         mode = "0400";

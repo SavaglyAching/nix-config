@@ -18,6 +18,7 @@
       bun
       nodejs
       sops
+      ssh-to-age
       eza
 
       # System administration
@@ -26,11 +27,13 @@
       dnsutils
       iotop
       nmap
+      nix-fast-build
       wakeonlan
 
       # File management and utilities
       cowsay
       curl
+      ripgrep
       exfatprogs
       nix-search-tv
       wget
@@ -39,6 +42,7 @@
       # Development tools
       opencode
       git
+      gh
       python3
       stow
       uv

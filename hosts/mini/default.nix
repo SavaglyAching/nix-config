@@ -9,12 +9,12 @@
     ../../system/sops.nix
     ../../services/samba-client.nix
     ../../services/samba-server-mini.nix
-    ../../services/syncthing.nix
+#    ../../services/syncthing.nix
 
     # Desktop environment (choose one)
     # ../../desktop/kde.nix
     ../../services/forgejo.nix
-    ../../services/nixbuild.nix
+ #   ../../services/nixbuild.nix
 
     # Services (uncomment as needed)
     # ../../services/ollama.nix
@@ -24,6 +24,8 @@
 
     # Container services
     ../../services/containers/karakeep.nix
+    ../../services/containers/openhands.nix
+    ../../services/containers/open-webui.nix
   ];
 
 

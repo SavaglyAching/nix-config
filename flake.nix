@@ -18,9 +18,17 @@
     niri = {
       url = "github:sodiboo/niri-flake";
     };
+    nix-fast-build = {
+      url = "github:Mic92/nix-fast-build";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-24.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixos-hardware, nixos-apple-silicon, sops-nix, disko, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixos-hardware, nixos-apple-silicon, sops-nix, disko, home-manager, nix-fast-build, nix-on-droid, ... }@inputs:
     let
       system = "x86_64-linux";
       specialArgs = {
@@ -171,6 +179,29 @@
         asahi-iso = nixosConfigs.asahi-installer.config.system.build.isoImage;
         # System build
         asahi = nixosConfigs.asahi.config.system.build.toplevel;
+      };
+
+      # Checks for nix-fast-build
+      checks.x86_64-linux = {
+        desk = nixosConfigs.desk.config.system.build.toplevel;
+        rica = nixosConfigs.rica.config.system.build.toplevel;
+        mini = nixosConfigs.mini.config.system.build.toplevel;
+        surface = nixosConfigs.surface.config.system.build.toplevel;
+        surface-iso = nixosConfigs.surface-installer.config.system.build.isoImage;
+      };
+
+      checks."aarch64-linux" = {
+        asahi = nixosConfigs.asahi.config.system.build.toplevel;
+        asahi-iso = nixosConfigs.asahi-installer.config.system.build.isoImage;
+      };
+
+      # Nix-on-Droid configuration
+      nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-linux";
+          config.allowUnfree = true;
+        };
+        modules = [ ./hosts/nix-on-droid ];
       };
     };
 }

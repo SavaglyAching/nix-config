@@ -24,6 +24,11 @@
     fu = "nix flake update ~/nix-config";
     nsp = "nix-shell -p ";
 
+    # nix-fast-build shortcuts
+    nfb = "nix-fast-build --no-nom --flake '.#checks.$(nix eval --raw --impure --expr builtins.currentSystem)'";
+    nfb-all = "nix-fast-build --no-nom";
+    nfb-remote = "nix-fast-build --no-nom --remote";
+
     tsr = "sudo tailscale up --ssh --reset";
     tst = "sudo tailscale up --exit-node \"ca-tor-wg-001.mullvad.ts.net\" --ssh";
 
@@ -109,6 +114,12 @@
                 cat "$output_file" | gemini -p "Analyze this NixOS rebuild failure and provide actionable solutions:"
             fi
             rm -f "$output_file"
+        }
+
+        # Fast build all configurations for current system
+        nfb-fast() {
+            local system=$(nix eval --raw --impure --expr builtins.currentSystem)
+            nix-fast-build --no-nom --skip-cached --flake ".#checks.$system"
         }
 
         # Load nix-specific configurations if available

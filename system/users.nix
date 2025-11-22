@@ -1,6 +1,27 @@
 { config, lib, pkgs, ... }:
 
 {
+  # Allow ham to run podman, systemctl, and nixos-rebuild commands without password for Claude Code
+  security.sudo.extraRules = [
+    {
+      users = [ "ham" ];
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/podman";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/systemctl";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/nixos-rebuild";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   users = {
     defaultUserShell = pkgs.zsh;
     users = {

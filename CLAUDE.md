@@ -86,6 +86,54 @@ colmena eval
 - Shares same modules as nixosConfigurations
 - Controlled from mini host (deployment manager)
 
+### Fast Building with nix-fast-build
+Uses parallel evaluation and concurrent builds to speed up multi-host deployments:
+
+```bash
+# Build checks for current system (default)
+nfb
+
+# Build all checks for all systems (x86_64-linux and aarch64-linux)
+nfb-all
+
+# Fast build with optimizations (skip cached, no output monitor)
+nfb-fast
+
+# Remote build on SSH host (uploads flake, builds remotely, downloads results)
+nfb-remote ham@desk
+
+# Build with Cachix upload
+nix-fast-build --cachix-cache <cache-name> --flake .#checks.$(nix eval --raw --impure --expr builtins.currentSystem)
+
+# Build specific attribute path
+nix-fast-build --flake .#packages.x86_64-linux.desk
+
+# Skip already-cached packages (useful for CI)
+nix-fast-build --skip-cached --flake .#checks.$(nix eval --raw --impure --expr builtins.currentSystem)
+
+# Machine-readable output for CI/automation
+nix-fast-build --result-file result.json --result-format json
+```
+
+**nix-fast-build Aliases**:
+- `nfb`: Build current system checks with compact output
+- `nfb-all`: Build all system checks
+- `nfb-fast`: Optimized fast build (skip cached, minimize output)
+- `nfb-remote`: Remote building (append SSH credentials)
+
+**Key Features**:
+- **Parallel evaluation**: Uses nix-eval-jobs for concurrent attribute evaluation
+- **Streaming builds**: Starts builds immediately as attributes finish evaluating
+- **Remote building**: Uploads flake, builds remotely, downloads results (no intermediate dependencies)
+- **Output monitoring**: Integrates nix-output-monitor for clean build progress
+- **Binary cache support**: Upload to Cachix or Attic (requires authentication)
+- **CI-friendly**: `--no-nom` flag provides single-line output updates for CI systems
+
+**Why nix-fast-build?**
+- Evaluating large flakes (many NixOS machines) is slow with standard `nix build`
+- Example: 1:50 minutes down to 10 seconds on AMD Ryzen 9 7950X3D for disko test suite
+- Concurrent evaluation + streaming builds = dramatic time savings
+
 ### Package Search with nix-search-tv
 ```bash
 # Basic fuzzy search for packages
