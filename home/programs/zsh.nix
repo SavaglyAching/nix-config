@@ -38,8 +38,8 @@
     s = "source ~/.zshrc";
     y = "yazi";
 
-    #
-    cc = "claude";
+    # Claude Code (use Home Manager version explicitly)
+    cc = "/etc/profiles/per-user/ham/bin/claude";
 
     # Media and networking
     yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 90 --no-part --downloader ffmpeg --hls-use-mpegts";

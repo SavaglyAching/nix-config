@@ -1,12 +1,18 @@
 {
   description = "NixOS Configuration";
 
+  nixConfig = {
+    extra-substituters = [ "https://numtide.cachix.org" ];
+    extra-trusted-public-keys = [ "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE=" ];
+  };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixos-apple-silicon.url = "github:nix-community/nixos-apple-silicon";
     sops-nix.url = "github:Mic92/sops-nix";
+    nix-ai-tools.url = "github:numtide/nix-ai-tools";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +34,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixos-hardware, nixos-apple-silicon, sops-nix, disko, home-manager, nix-fast-build, nix-on-droid, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixos-hardware, nixos-apple-silicon, sops-nix, disko, home-manager, nix-ai-tools, nix-fast-build, nix-on-droid, ... }@inputs:
+>>>>>>> a1731b0 (Integrate nix-ai-tools flake for centralized AI tool management)
     let
       system = "x86_64-linux";
       specialArgs = {
@@ -40,6 +47,7 @@
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
+        ai-tools = nix-ai-tools.packages.${system};
       };
       commonModules = [
         sops-nix.nixosModules.sops
@@ -78,15 +86,6 @@
           ] ++ commonModules;
         };
 
-        # Surface installer ISO
-        "surface-installer" = nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
-          modules = [
-            ./installer/surface-iso.nix
-            nixos-hardware.nixosModules.microsoft-surface-pro-intel
-          ] ++ commonModules;
-        };
-
         # Asahi host (Apple Silicon)
         "asahi" = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
@@ -100,29 +99,10 @@
               system = "aarch64-linux";
               config.allowUnfree = true;
             };
+            ai-tools = nix-ai-tools.packages."aarch64-linux";
           };
           modules = [
             ./hosts/asahi
-            nixos-apple-silicon.nixosModules.apple-silicon-support
-          ] ++ commonModules;
-        };
-
-        # Asahi installer ISO
-        "asahi-installer" = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = {
-            unstable = import nixpkgs {
-              system = "aarch64-linux";
-              config.allowUnfree = true;
-              overlays = [ nixos-apple-silicon.overlays.apple-silicon-overlay ];
-            };
-            stable = import nixpkgs-stable {
-              system = "aarch64-linux";
-              config.allowUnfree = true;
-            };
-          };
-          modules = [
-            ./installer/asahi-iso.nix
             nixos-apple-silicon.nixosModules.apple-silicon-support
           ] ++ commonModules;
         };
@@ -165,10 +145,8 @@
         };
       };
 
-      # ISO image outputs
+      # System build outputs
       packages.${system} = {
-        surface-iso = nixosConfigs.surface-installer.config.system.build.isoImage;
-        # System builds
         desk = nixosConfigs.desk.config.system.build.toplevel;
         rica = nixosConfigs.rica.config.system.build.toplevel;
         mini = nixosConfigs.mini.config.system.build.toplevel;
@@ -176,8 +154,6 @@
       };
 
       packages."aarch64-linux" = {
-        asahi-iso = nixosConfigs.asahi-installer.config.system.build.isoImage;
-        # System build
         asahi = nixosConfigs.asahi.config.system.build.toplevel;
       };
 

@@ -24,6 +24,7 @@
     ../../system/sops.nix
     ../../services/samba-client.nix
     ../../services/syncthing.nix
+    ../../services/containers/claude-code-proxy.nix
     #   ../../services/containers/audiobookshelf.nix
   ];
 

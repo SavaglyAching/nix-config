@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  ai-tools,
   ...
 }:
 
@@ -40,7 +41,6 @@
       unzip
 
       # Development tools
-      opencode
       git
       gh
       python3
@@ -51,6 +51,11 @@
 
       # Media tools
       ffmpeg-full
+    ] ++ [
+      # AI tools from nix-ai-tools flake
+      ai-tools.opencode
+      ai-tools.gemini-cli
+      ai-tools.claude-code
     ];
 
     pathsToLink = [ "/share/zsh" ];
