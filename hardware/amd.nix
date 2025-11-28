@@ -9,10 +9,14 @@
     enable = true;
     enable32Bit = true;
 
-    # AMD ROCm drivers for GPU compute
-    # extraPackages = with pkgs; [
-    #   rocmPackages.clr.icd
-    # ];
+    # Vulkan drivers for AMD (RADV is enabled by default)
+    extraPackages = with pkgs; [
+      # rocmPackages.clr.icd  # ROCm for GPU compute (uncomment if needed)
+    ];
+
+    # 32-bit Vulkan support for Steam (RADV is enabled by default)
+    extraPackages32 = with pkgs.driversi686Linux; [
+    ];
   };
 
   # AMD-specific packages
