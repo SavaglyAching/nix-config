@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  # Allow ham to run podman, systemctl, and nixos-rebuild commands without password for Claude Code
+  # Allow wheel group full passwordless sudo for Colmena deployments
+  security.sudo.wheelNeedsPassword = false;
+
+  # Additional specific rules for ham user
   security.sudo.extraRules = [
     {
       users = [ "ham" ];
