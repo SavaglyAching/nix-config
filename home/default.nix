@@ -21,6 +21,7 @@
     ./programs/nh.nix
     ./programs/kitty.nix
     ./programs/claude-code.nix
+    ./programs/superclaude.nix
     #./programs/kodi.nix
     ./programs/npm.nix
     ./programs/starship.nix
