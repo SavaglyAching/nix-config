@@ -36,6 +36,7 @@
       curl
       ripgrep
       exfatprogs
+      jq
       nix-search-tv
       wget
       unzip

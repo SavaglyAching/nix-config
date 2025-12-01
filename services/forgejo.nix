@@ -6,8 +6,29 @@
 }:
 
 {
+  sops.secrets = {
+    default = {
+      owner = "forgejo";
+      group = "forgejo";
+      mode = "0440";
+    };
+  };
+
+  # SOPS secret declarations
+  sops.templates."forgejo-admin-username" = {};
+  sops.secrets."forgejo-admin-username" = {
+    key = "forgejo_admin_username";
+    path = "/run/secrets/forgejo_admin_username";
+  };
+
+  sops.templates."forgejo-admin-password" = {};
+  sops.secrets."forgejo-admin-password" = {
+    key = "forgejo_admin_password";
+    path = "/run/secrets/forgejo_admin_password";
+  };
+
   services.forgejo = {
-    enable = false;  # Disabled: credential files missing, enable when ready to use
+    enable = true;  # Enabled: admin credentials configured in SOPS secrets
 
     # Database configuration
     database = {

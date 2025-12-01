@@ -38,6 +38,22 @@
     s = "source ~/.zshrc";
     y = "yazi";
 
+    # Find file and open in micro
+    mf = ''${pkgs.writeShellScriptBin "mf" ''
+      if [ $# -eq 0 ]; then
+        echo "Usage: mf <filename-pattern>"
+        return 1
+      fi
+
+      found_file=$(fd "$1" --type f | fzf --filter="$1" --select-1)
+
+      if [ -n "$found_file" ]; then
+        micro "$found_file"
+      else
+        return 1
+      fi
+    ''}'';
+
     # Claude Code (use Home Manager version explicitly)
     cc = "/etc/profiles/per-user/ham/bin/claude";
 
