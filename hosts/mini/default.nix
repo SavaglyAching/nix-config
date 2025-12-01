@@ -26,6 +26,7 @@
     ../../services/containers/karakeep.nix
     ../../services/containers/openhands.nix
     ../../services/containers/open-webui.nix
+    ../../services/containers/tavern.nix
   ];
 
 
