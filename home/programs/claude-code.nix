@@ -4,6 +4,13 @@
   programs.claude-code = {
     enable = true;
 
+    settings = {
+      statusLine = {
+        type = "command";
+        command = "printf '\\033[32m%s@%s\\033[0m:\\033[34m%s\\033[0m' \"$(whoami)\" \"$(hostname)\" \"$(pwd | sed 's|'\"$HOME\"'|~|')\"; branch=$(git branch --show-current 2>/dev/null); [ -n \"$branch\" ] && printf ' \\033[31m%s\\033[0m' \"$branch\"; echo";
+      };
+    };
+
     mcpServers = {
       # NixOS MCP Server - for package search, options, and Home Manager
       nixos = {
@@ -72,6 +79,16 @@
         args = [
           "-y"
           "perplexity-mcp"
+        ];
+      };
+
+      # Sequential Thinking MCP Server - for step-by-step reasoning
+      sequential-thinking = {
+        type = "stdio";
+        command = "npx";
+        args = [
+          "-y"
+          "@modelcontextprotocol/server-sequential-thinking"
         ];
       };
     };

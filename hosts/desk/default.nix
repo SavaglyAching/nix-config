@@ -37,8 +37,8 @@
         enable = true;
         port = 22;
         authorizedKeys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGd3iG1U9JtdEtoTNCe/KyVHaK7DFkWQD7J4jnrZuvC+ u0_a302@localhost"
-        ]; # IMPORTANT: Replace with your actual public SSH key
+          config.sops.secrets."authorized_keys/desk_remote_unlock".path
+        ];
         hostKeys = [ "/etc/secrets/initrd/initrd_ssh_host_rsa_key" ];
         shell = "/bin/cryptsetup-askpass";
       };

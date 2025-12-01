@@ -43,8 +43,8 @@
         ++ lib.optional (config.virtualisation.waydroid.enable or false) "waydroid";
         shell = pkgs.zsh;
         openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHqNpQzPXCgbUM3EA99GXlfeL8nnDDhJEqH+ZzLy84GO j@deskv"
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAU436bK6EJ8RgdaxTQzg2KM887Ir5LbUtKKKIc/Mjh0 Remote builder key for rica"
+          config.sops.secrets."authorized_keys/user_ham_deskv".path
+          config.sops.secrets."authorized_keys/user_ham_remote_builder".path
         ];
       };
     };

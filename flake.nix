@@ -34,8 +34,21 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixos-hardware, nixos-apple-silicon, sops-nix, disko, home-manager, nix-ai-tools, nix-fast-build, nix-on-droid, ... }@inputs:
->>>>>>> a1731b0 (Integrate nix-ai-tools flake for centralized AI tool management)
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-stable,
+      nixos-hardware,
+      nixos-apple-silicon,
+      sops-nix,
+      disko,
+      home-manager,
+      nix-ai-tools,
+      nix-fast-build,
+      nix-on-droid,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
       specialArgs = {
@@ -54,13 +67,16 @@
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
         ./system/home-manager.nix
-        ({ config, ... }: {
-          nix.settings.substituters = [
-            "https://cache.nixos.org"
-            "https://nix-community.cachix.org"
-            "https://nixos-apple-silicon.cachix.org"
-          ];
-        })
+        (
+          { config, ... }:
+          {
+            nix.settings.substituters = [
+              "https://cache.nixos.org"
+              "https://nix-community.cachix.org"
+              "https://nixos-apple-silicon.cachix.org"
+            ];
+          }
+        )
       ];
       nixosConfigs = {
         "desk" = nixpkgs.lib.nixosSystem {
@@ -83,7 +99,8 @@
           modules = [
             ./hosts/surface
             nixos-hardware.nixosModules.microsoft-surface-pro-intel
-          ] ++ commonModules;
+          ]
+          ++ commonModules;
         };
 
         # Asahi host (Apple Silicon)
@@ -104,7 +121,8 @@
           modules = [
             ./hosts/asahi
             nixos-apple-silicon.nixosModules.apple-silicon-support
-          ] ++ commonModules;
+          ]
+          ++ commonModules;
         };
       };
     in
@@ -141,7 +159,11 @@
 
         surface = {
           deployment.targetHost = "surface";
-          imports = [ ./hosts/surface nixos-hardware.nixosModules.microsoft-surface-pro-intel ] ++ commonModules;
+          imports = [
+            ./hosts/surface
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
+          ]
+          ++ commonModules;
         };
       };
 
@@ -163,12 +185,10 @@
         rica = nixosConfigs.rica.config.system.build.toplevel;
         mini = nixosConfigs.mini.config.system.build.toplevel;
         surface = nixosConfigs.surface.config.system.build.toplevel;
-        surface-iso = nixosConfigs.surface-installer.config.system.build.isoImage;
       };
 
       checks."aarch64-linux" = {
         asahi = nixosConfigs.asahi.config.system.build.toplevel;
-        asahi-iso = nixosConfigs.asahi-installer.config.system.build.isoImage;
       };
 
       # Nix-on-Droid configuration

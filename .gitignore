@@ -6,4 +6,6 @@ Gemini.md
 Claude.md
 .env
 .serena
+.gemini/
+dotfiles/
 result

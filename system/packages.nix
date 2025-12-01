@@ -48,15 +48,18 @@
       uv
       podman-compose
       docker-compose
+      nix-direnv
 
       # Media tools
       ffmpeg-full
-    ] ++ [
-      # AI tools from nix-ai-tools flake
-      ai-tools.opencode
-      ai-tools.gemini-cli
-      ai-tools.claude-code
-    ];
+     ] ++ [
+       # AI tools from nix-ai-tools flake
+       ai-tools.opencode
+       ai-tools.gemini-cli
+       ai-tools.claude-code
+       ai-tools.codex
+       ai-tools.claude-code-router
+     ];
 
     pathsToLink = [ "/share/zsh" ];
 

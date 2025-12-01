@@ -17,6 +17,7 @@
 
   # direnv - Load environment variables from .envrc files
   programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 
   # --- Automatic Garbage Collection ---
   # This is recommended to run alongside auto-updates to free up disk space.

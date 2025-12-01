@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ai-tools,
+  ...
+}:
 
 {
   # SOPS template to generate claude-code-router config with API keys
@@ -12,7 +18,7 @@
       APIKEY = "sk-ccr-secret-key";
       API_TIMEOUT_MS = "600000";
       PROXY_URL = "";
-      transformers = [];
+      transformers = [ ];
       Providers = [
         {
           name = "GLM";
@@ -57,7 +63,7 @@
           ];
         };
         powerline = {
-          modules = [];
+          modules = [ ];
         };
       };
       Router = {
@@ -81,4 +87,17 @@
   systemd.tmpfiles.rules = [
     "d /home/ham/.claude-code-router 0755 ham users -"
   ];
+
+  # Systemd user service for claude-code-router
+  systemd.user.services.claude-code-router = {
+    description = "Claude Code Router";
+    wantedBy = [ "default.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "${ai-tools.claude-code-router}/bin/ccr start";
+      Restart = "always";
+      RestartSec = 5;
+      Environment = "HOME=/home/ham";
+    };
+  };
 }

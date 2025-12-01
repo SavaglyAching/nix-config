@@ -20,7 +20,7 @@
 
   # Enable Claude Code with SuperClaude integration
   programs.claude-code.enable = true;
-  programs.claude-code.package = pkgs.unstable.claude-code;
+  programs.claude-code.package = pkgs.claude-code;
 
   # Shell aliases for SuperClaude workflow
   programs.zsh.shellAliases = {
@@ -54,68 +54,6 @@
     SUPERCLAUDE_HOME = "${config.home.homeDirectory}/.local/share/superclaude";
   };
 
-  # Activation script to install SuperClaude with pipx
-  home.activation.installSuperClaude = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    # Create SuperClaude directories
-    mkdir -p "$HOME/.local/share/superclaude"
-    mkdir -p "$HOME/.claude/commands"
-
-    echo "Setting up SuperClaude Framework..."
-
-    # Check if superclaude command is available
-    if ! command -v superclaude >/dev/null 2>&1; then
-      echo "Installing SuperClaude Framework with pipx..."
-      pipx install superclaude
-
-      if [ $? -eq 0 ]; then
-        echo "SuperClaude Framework installed successfully"
-
-        # Install Claude Code commands
-        echo "Installing Claude Code commands..."
-        superclaude install 2>/dev/null || echo "Note: Command installation had minor issues, but framework should work"
-
-        # Mark installation
-        touch "$HOME/.local/share/superclaude/.pipx-installed"
-        echo "SuperClaude setup complete"
-      else
-        echo "Error: Failed to install SuperClaude Framework"
-        exit 1
-      fi
-    else
-      echo "SuperClaude Framework already installed ($(superclaude --version 2>/dev/null || echo 'version unknown'))"
-
-      # Upgrade if needed (optional - comment out if you don't want auto-upgrades)
-      # echo "Checking for updates..."
-      # pipx upgrade superclaude
-
-      # Ensure commands are installed
-      if [ ! -d "$HOME/.claude/commands" ] || [ -z "$(ls -A $HOME/.claude/commands 2>/dev/null)" ]; then
-        echo "Installing Claude Code commands..."
-        superclaude install 2>/dev/null || echo "Note: Command installation had minor issues"
-      fi
-    fi
-
-    # Set proper permissions
-    chmod -R 755 "$HOME/.claude/" 2>/dev/null || true
-    chmod -R 755 "$HOME/.local/share/superclaude" 2>/dev/null || true
-
-    echo "SuperClaude Framework ready"
-    echo "Available commands:"
-    echo "  sc          - Run superclaude"
-    echo "  sc-install  - Install or update SuperClaude"
-    echo "  sc-update   - Upgrade SuperClaude"
-    echo "  superclaude  - Direct access to SuperClaude CLI"
-  '';
-
-  # Optional cleanup for pipx-based installation
-  home.activation.cleanupSuperClaude = lib.hm.dag.entryBefore ["installSuperClaude"] ''
-    # Clean up any old installations if they exist
-    if [ -f "$HOME/.local/share/superclaude/.installed" ] && [ ! -f "$HOME/.local/share/superclaude/.pipx-installed" ]; then
-      echo "Cleaning up old SuperClaude installation..."
-      rm -rf "$HOME/.local/share/superclaude/.installed" 2>/dev/null || true
-    fi
-  '';
-
   # Claude Code settings optimized for SuperClaude
   programs.claude-code.settings = {
     # Enable MCP servers that work well with SuperClaude
@@ -137,46 +75,65 @@
     };
   };
 
-  # Optional systemd user service for ensuring SuperClaude environment
-  systemd.user.services.superclaude-env = {
-    Unit = {
-      Description = "SuperClaude Framework Environment Setup";
-      After = [ "network.target" ];
-    };
-    Service = {
-      Type = "oneshot";
-      RemainAfterExit = "yes";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'mkdir -p ${config.home.homeDirectory}/.local/share/superclaude ${config.home.homeDirectory}/.cache/uv'";
-    };
-    WantedBy = [ "default.target" ];
-  };
+  # Activation script to install SuperClaude with pipx
+  home.activation.setupSuperClaude = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    # Create SuperClaude directories
+    mkdir -p "$HOME/.local/share/superclaude"
+    mkdir -p "$HOME/.claude/commands"
 
-  # Module configuration options
-  options.programs.superclaude = {
-    enable = lib.mkEnableOption "SuperClaude Framework installed via pipx";
+    echo "Setting up SuperClaude Framework..."
 
-    autoInstall = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Whether to automatically install SuperClaude during Home Manager activation";
-    };
+    # Check if superclaude command is available
+    if ! command -v superclaude >/dev/null 2>&1; then
+      echo "Installing SuperClaude Framework with pipx..."
+      ${pkgs.pipx}/bin/pipx install superclaude
 
-    autoUpdate = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether to automatically upgrade SuperClaude during activation";
-    };
+      if [ $? -eq 0 ]; then
+        echo "SuperClaude Framework installed successfully"
 
-    version = lib.mkOption {
-      type = lib.types.str;
-      default = "latest";
-      description = "Version of SuperClaude to install (default: latest from PyPI)";
-    };
+        # Install Claude Code commands
+        echo "Installing Claude Code commands..."
+        superclaude install 2>/dev/null || echo "Note: Command installation had minor issues, but framework should work"
 
-    developmentMode = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable development aliases for local SuperClaude source development";
-    };
-  };
+        # Mark installation
+        touch "$HOME/.local/share/superclaude/.pipx-installed"
+        echo "SuperClaude setup complete"
+      else
+        echo "Error: Failed to install SuperClaude Framework"
+        exit 1
+      fi
+    else
+      echo "SuperClaude Framework already installed ($(superclaude --version 2>/dev/null || echo 'version unknown'))"
+
+      # Upgrade if needed (optional - comment out if you don't want auto-upgrades)
+      # echo "Checking for updates..."
+      # ${pkgs.pipx}/bin/pipx upgrade superclaude
+
+      # Ensure commands are installed
+      if [ ! -d "$HOME/.claude/commands" ] || [ -z "$(ls -A $HOME/.claude/commands 2>/dev/null)" ]; then
+        echo "Installing Claude Code commands..."
+        superclaude install 2>/dev/null || echo "Note: Command installation had minor issues"
+      fi
+    fi
+
+    # Set proper permissions
+    chmod -R 755 "$HOME/.claude/" 2>/dev/null || true
+    chmod -R 755 "$HOME/.local/share/superclaude" 2>/dev/null || true
+
+    echo "SuperClaude Framework ready"
+    echo "Available commands:"
+    echo "  sc          - Run superclaude"
+    echo "  sc-install  - Install or update SuperClaude"
+    echo "  sc-update   - Upgrade SuperClaude"
+    echo "  superclaude  - Direct access to SuperClaude CLI"
+  '';
+
+  # Optional cleanup for pipx-based installation
+  home.activation.cleanupSuperClaude = lib.hm.dag.entryBefore ["setupSuperClaude"] ''
+    # Clean up any old installations if they exist
+    if [ -f "$HOME/.local/share/superclaude/.installed" ] && [ ! -f "$HOME/.local/share/superclaude/.pipx-installed" ]; then
+      echo "Cleaning up old SuperClaude installation..."
+      rm -rf "$HOME/.local/share/superclaude/.installed" 2>/dev/null || true
+    fi
+  '';
 }

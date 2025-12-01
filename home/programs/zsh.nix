@@ -41,11 +41,14 @@
     # Claude Code (use Home Manager version explicitly)
     cc = "/etc/profiles/per-user/ham/bin/claude";
 
+    # Claude Code with z.ai configuration
+    ccz = "ANTHROPIC_AUTH_TOKEN=\"$ZAI_API_KEY\" ANTHROPIC_BASE_URL=\"https://api.z.ai/api/anthropic\" API_TIMEOUT_MS=\"3000000\" /etc/profiles/per-user/ham/bin/claude";
+
     # Media and networking
-    yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 90 --no-part --downloader ffmpeg --hls-use-mpegts";
+    yt = "yt-dlp --retries infinite --fragment-retries infinite --socket-timeout 190 --no-part --downloader ffmpeg --hls-use-mpegts -o '~/streams/%(title)s.%(ext)s'";
     wud = "wakeonlan d8:43:ae:50:aa:72";
     rmv = "rsync -avz --checksum --progress --remove-source-files";
-    mvstreams = "mkdir -p ~/streams && find . -maxdepth 1 -type f \\( -name '*.mp4' -o -name '*.flv' \\) -exec mv -v {} ~/streams/ \\;";
+    mvstreams = "mkdir -p ~/streams && find . -maxdepth 1 -type f \\( -name '*.mp4' -o -name '*.flv' -o -name '*.mkv' \\) -exec mv -v {} ~/streams/ \\;";
 
     # SOPS shortcuts
     sops-edit = "sops";
@@ -76,6 +79,9 @@
 
       # Default priority initialization
       ''
+        # Add ~/.local/bin to PATH
+        export PATH=$HOME/.local/bin:$PATH
+
         # Set DISPLAY for XWayland if not set (needed for Steam and X11 apps on Wayland)
         if [ -z "$DISPLAY" ] && [ "$XDG_SESSION_TYPE" = "wayland" ]; then
           export DISPLAY=:0
@@ -85,6 +91,7 @@
         [ -f /run/secrets/OPENROUTER_API_KEY ] && export OPENROUTER_API_KEY=$(cat /run/secrets/OPENROUTER_API_KEY)
         [ -f /run/secrets/GEMINI_API_KEY ] && export GEMINI_API_KEY=$(cat /run/secrets/GEMINI_API_KEY)
         [ -f /run/secrets/PERPLEXITY_API_KEY ] && export PERPLEXITY_API_KEY=$(cat /run/secrets/PERPLEXITY_API_KEY)
+        [ -f /run/secrets/ZAI_API_KEY ] && export ZAI_API_KEY=$(cat /run/secrets/ZAI_API_KEY)
 
         # Moose greeting
         fortune | cowsay -r | lolcat

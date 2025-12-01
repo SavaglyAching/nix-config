@@ -1,0 +1,200 @@
+{
+  "project": {
+    "name": "NixOS Configuration",
+    "description": "NixOS configuration using Nix Flakes with multi-host support",
+    "generated": "2025-11-29T08:00:00Z",
+    "version": "24.11",
+    "architecture": ["x86_64-linux", "aarch64-linux"]
+  },
+  "entry_points": {
+    "main": "flake.nix",
+    "common_config": "common.nix",
+    "home_manager": "home/default.nix",
+    "secrets": "secrets.yaml"
+  },
+  "hosts": {
+    "desk": {
+      "path": "hosts/desk",
+      "purpose": "Desktop workstation",
+      "architecture": "x86_64-linux",
+      "desktop": "KDE",
+      "features": ["gaming", "podman", "btrfs", "samba-server"]
+    },
+    "rica": {
+      "path": "hosts/rica",
+      "purpose": "File server",
+      "architecture": "x86_64-linux",
+      "desktop": "headless",
+      "features": ["samba", "containers", "caddy-proxy", "audiobookshelf"]
+    },
+    "mini": {
+      "path": "hosts/mini",
+      "purpose": "Deployment manager",
+      "architecture": "x86_64-linux",
+      "desktop": "headless",
+      "features": ["colmena", "karakeep", "borgbackup", "forgejo"]
+    },
+    "surface": {
+      "path": "hosts/surface",
+      "purpose": "Microsoft Surface Pro",
+      "architecture": "x86_64-linux",
+      "desktop": "GNOME",
+      "features": ["waydroid", "nixos-hardware"]
+    },
+    "asahi": {
+      "path": "hosts/asahi",
+      "purpose": "Apple Silicon Mac",
+      "architecture": "aarch64-linux",
+      "desktop": "TBD",
+      "features": ["asahi-linux", "apple-silicon-support"]
+    }
+  },
+  "modules": {
+    "system": {
+      "boot": { "path": "system/boot.nix", "purpose": "Boot loader and kernel configuration" },
+      "network": { "path": "system/network.nix", "purpose": "Network settings and Tailscale" },
+      "users": { "path": "system/users.nix", "purpose": "User account configuration" },
+      "packages": { "path": "system/packages.nix", "purpose": "System-wide packages" },
+      "nix": { "path": "system/nix.nix", "purpose": "Nix daemon settings" },
+      "sops": { "path": "system/sops.nix", "purpose": "SOPS secrets management" },
+      "btrfs": { "path": "system/btrfs.nix", "purpose": "BTRFS filesystem configuration" },
+      "remote_builder": { "path": "system/remote-builder.nix", "purpose": "Remote build configuration" },
+      "claude_code_router": { "path": "system/claude-code-router.nix", "purpose": "Claude Code MCP integration" },
+      "home_manager": { "path": "system/home-manager.nix", "purpose": "Home Manager integration" },
+      "bluetooth": { "path": "system/bluetooth.nix", "purpose": "Bluetooth support" },
+      "wifi": { "path": "system/wifi.nix", "purpose": "Wireless networking" }
+    },
+    "services": {
+      "ssh": { "path": "services/ssh.nix", "purpose": "SSH server configuration" },
+      "tailscale": { "path": "services/tailscale.nix", "purpose": "VPN connectivity" },
+      "podman": { "path": "services/podman.nix", "purpose": "Container backend" },
+      "samba_client": { "path": "services/samba-client.nix", "purpose": "SMB client" },
+      "samba_server": { "path": "services/samba-server.nix", "purpose": "SMB server" },
+      "ollama": { "path": "services/ollama.nix", "purpose": "Local AI model serving" },
+      "remote_desktop": { "path": "services/remote-desktop.nix", "purpose": "RDP/RustDesk access" },
+      "forgejo": { "path": "services/forgejo.nix", "purpose": "Git server" },
+      "borgbackup_repo": { "path": "services/borgbackup-repo.nix", "purpose": "Backup repository" },
+      "syncthing": { "path": "services/syncthing.nix", "purpose": "File synchronization" },
+      "flatpak": { "path": "services/flatpak.nix", "purpose": "Flatpak support" },
+      "nixbuild": { "path": "services/nixbuild.nix", "purpose": "Nix build service" },
+      "xrdp": { "path": "services/xrdp.nix", "purpose": "XRDP server" },
+      "rustdesk_server": { "path": "services/rustdesk-server.nix", "purpose": "RustDesk server" }
+    },
+    "desktop": {
+      "kde": { "path": "desktop/kde.nix", "purpose": "KDE Plasma desktop environment" },
+      "gnome": { "path": "desktop/gnome.nix", "purpose": "GNOME desktop environment" },
+      "xfce": { "path": "desktop/xfce.nix", "purpose": "XFCE lightweight desktop" },
+      "hyprland": { "path": "desktop/hyprland.nix", "purpose": "Hyprland Wayland compositor" },
+      "niri": { "path": "desktop/niri.nix", "purpose": "Niri experimental compositor" },
+      "gnome_tablet": { "path": "desktop/gnome-tablet.nix", "purpose": "Tablet-optimized GNOME" }
+    },
+    "containers": {
+      "template": { "path": "services/containers/template.nix", "purpose": "Container service template" },
+      "karakeep": { "path": "services/containers/karakeep.nix", "purpose": "Knowledge management" },
+      "homepage": { "path": "services/containers/homepage.nix", "purpose": "Dashboard interface" },
+      "audiobookshelf": { "path": "services/containers/audiobookshelf.nix", "purpose": "Audiobook/Podcast server" },
+      "claude_code_proxy": { "path": "services/containers/claude-code-proxy.nix", "purpose": "Claude Code proxy" },
+      "openhands": { "path": "services/containers/openhands.nix", "purpose": "AI coding assistant" },
+      "open_webui": { "path": "services/containers/open-webui.nix", "purpose": "Web-based AI interface" }
+    }
+  },
+  "home_programs": {
+    "core": [
+      { "path": "home/programs/git.nix", "purpose": "Git version control" },
+      { "path": "home/programs/zsh.nix", "purpose": "Z shell configuration" },
+      { "path": "home/programs/tmux.nix", "purpose": "Terminal multiplexer" },
+      { "path": "home/programs/ssh.nix", "purpose": "SSH client" }
+    ],
+    "editors": [
+      { "path": "home/programs/helix.nix", "purpose": "Helix editor" },
+      { "path": "home/programs/neovim.nix", "purpose": "Neovim editor" },
+      { "path": "home/programs/kitty.nix", "purpose": "Kitty terminal" }
+    ],
+    "development": [
+      { "path": "home/programs/npm.nix", "purpose": "Node.js package manager" },
+      { "path": "home/programs/bun.nix", "purpose": "JavaScript runtime" },
+      { "path": "home/programs/nh.nix", "purpose": "Nix helper tool" }
+    ],
+    "ai_tools": [
+      { "path": "home/programs/claude-code.nix", "purpose": "Claude Code AI assistant" },
+      { "path": "home/programs/superclaude.nix", "purpose": "SuperClaude framework" }
+    ],
+    "shell_tools": [
+      { "path": "home/programs/starship.nix", "purpose": "Shell prompt" },
+      { "path": "home/programs/bash.nix", "purpose": "Bash shell" }
+    ],
+    "wayland": [
+      { "path": "home/programs/wayland/default.nix", "purpose": "Wayland configuration" },
+      { "path": "home/programs/wayland/waybar.nix", "purpose": "Wayland status bar" },
+      { "path": "home/programs/wayland/mako.nix", "purpose": "Wayland notifications" },
+      { "path": "home/programs/hyprland/default.nix", "purpose": "Hyprland compositor" },
+      { "path": "home/programs/hyprland/keybindings.nix", "purpose": "Hyprland keybindings" },
+      { "path": "home/programs/hyprland/hyprland-settings.nix", "purpose": "Hyprland settings" },
+      { "path": "home/programs/hypridle.nix", "purpose": "Hyprland idle manager" },
+      { "path": "home/programs/hyprpaper.nix", "purpose": "Hyprland wallpaper manager" }
+    ],
+    "specialized": [
+      { "path": "home/programs/librewolf/librewolf.nix", "purpose": "LibreWolf browser" },
+      { "path": "home/programs/kodi.nix", "purpose": "Kodi media center" }
+    ]
+  },
+  "gaming": {
+    "main": { "path": "gaming/gaming.nix", "purpose": "Gaming optimizations and Steam" },
+    "ksp": { "path": "gaming/games/ksp.nix", "purpose": "Kerbal Space Program specific config" }
+  },
+  "hardware": {
+    "amd": { "path": "hardware/amd.nix", "purpose": "AMD GPU and CPU support" }
+  },
+  "portable": {
+    "default": { "path": "portable/default.nix", "purpose": "Portable device defaults" },
+    "sensors": { "path": "portable/sensors.nix", "purpose": "Hardware sensor support" },
+    "gjs_osk": { "path": "portable/gjs-osk.nix", "purpose": "On-screen keyboard" },
+    "power_management": { "path": "portable/power-management.nix", "purpose": "Power optimization" }
+  },
+  "documentation": {
+    "main_readme": { "path": "README.md", "purpose": "Basic project documentation" },
+    "claude_instructions": { "path": "CLAUDE.md", "purpose": "Claude Code guidance" },
+    "gemini_integration": { "path": "GEMINI.md", "purpose": "Gemini CLI usage" }
+  },
+  "flake_inputs": {
+    "nixpkgs": { "url": "github:nixos/nixpkgs/nixos-unstable", "purpose": "Main package collection" },
+    "nixpkgs_stable": { "url": "github:nixos/nixpkgs/nixos-25.05", "purpose": "Stable packages" },
+    "nixos_hardware": { "url": "github:NixOS/nixos-hardware", "purpose": "Hardware drivers" },
+    "nixos_apple_silicon": { "url": "github:nix-community/nixos-apple-silicon", "purpose": "Apple Silicon support" },
+    "sops_nix": { "url": "github:Mic92/sops-nix", "purpose": "Secrets management" },
+    "nix_ai_tools": { "url": "github:numtide/nix-ai-tools", "purpose": "AI tools integration" },
+    "disko": { "url": "github:nix-community/disko", "purpose": "Disk management" },
+    "home_manager": { "url": "github:nix-community/home-manager", "purpose": "User configuration" },
+    "niri": { "url": "github:sodiboo/niri-flake", "purpose": "Wayland compositor" },
+    "nix_fast_build": { "url": "github:Mic92/nix-fast-build", "purpose": "Build optimization" },
+    "nix_on_droid": { "url": "github:nix-community/nix-on-droid/release-24.05", "purpose": "Android support" }
+  },
+  "deployment": {
+    "controller": "mini",
+    "method": "colmena",
+    "ssh_user": "ham",
+    "network": "tailscale",
+    "hosts": ["desk", "rica", "mini", "surface"]
+  },
+  "optimization": {
+    "index_creation_tokens": 2000,
+    "index_reading_tokens": 3000,
+    "full_codebase_tokens": 58000,
+    "token_reduction_percent": 94,
+    "break_even_sessions": 1,
+    "ten_session_savings": 550000,
+    "hundred_session_savings": 5500000
+  },
+  "security": {
+    "secrets_management": "SOPS",
+    "encryption": "AGE",
+    "recipients": 4,
+    "runtime_decryption": true,
+    "critical_issues": [
+      "SSH keys hardcoded in hosts/desk/default.nix:32-33 - should migrate to SOPS secrets"
+    ],
+    "recommendations": [
+      "All sensitive data should be in SOPS secrets, not configuration files"
+    ]
+  }
+}

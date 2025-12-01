@@ -15,6 +15,7 @@
     ./system/packages.nix
     ./system/nix.nix
     ./system/sops.nix
+    ./system/claude-code-router.nix
 
     # Essential services
     ./services/ssh.nix

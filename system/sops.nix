@@ -51,6 +51,11 @@
         group = "users";
         mode = "0400";
       };
+      ZAI_API_KEY = {
+        owner = "ham";
+        group = "users";
+        mode = "0400";
+      };
 
       # Karakeep secrets
       "karakeep_secrets/meili_master_key" = {
@@ -73,6 +78,23 @@
       open-webui-secret-key = {
         owner = "root";
         group = "root";
+        mode = "0400";
+      };
+
+      # SSH authorized keys for user accounts
+      "authorized_keys/desk_remote_unlock" = {
+        owner = "root";
+        group = "root";
+        mode = "0400";
+      };
+      "authorized_keys/user_ham_deskv" = {
+        owner = "ham";
+        group = "users";
+        mode = "0400";
+      };
+      "authorized_keys/user_ham_remote_builder" = {
+        owner = "ham";
+        group = "users";
         mode = "0400";
       };
 
