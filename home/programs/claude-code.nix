@@ -7,7 +7,20 @@
     settings = {
       statusLine = {
         type = "command";
-        command = "printf '\\033[32m%s@%s\\033[0m:\\033[34m%s\\033[0m' \"$(whoami)\" \"$(hostname)\" \"$(pwd | sed 's|'\"$HOME\"'|~|')\"; branch=$(git branch --show-current 2>/dev/null); [ -n \"$branch\" ] && printf ' \\033[31m%s\\033[0m' \"$branch\"; echo";
+        command = ''
+          # User and hostname in green (matches ZSH prompt)
+          printf '\\033[32m%s@%s\\033[0m:' "$(whoami)" "$(hostname)"
+
+          # Current directory in blue, with ~ substitution
+          printf '\\033[34m%s\\033[0m' "$(pwd | sed "s|^$HOME|~|")"
+
+          # Git branch in red if available (matches ZSH vcs_info)
+          if branch=$(git branch --show-current 2>/dev/null); then
+            printf ' \\033[31m%s\\033[0m' "$branch"
+          fi
+
+          echo
+        '';
       };
     };
 
