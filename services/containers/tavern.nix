@@ -9,7 +9,7 @@
       OPENROUTER_API_KEY=${config.sops.placeholder."OPENROUTER_API_KEY"}
 
       # OpenAI API key
-      OPENAI_API_KEY=${config.sops.placeholder."karakeep_secrets.openai_api_key"}
+      OPENAI_API_KEY=${config.sops.placeholder."karakeep_secrets/openai_api_key"}
 
       # Gemini API key
       GEMINI_API_KEY=${config.sops.placeholder."GEMINI_API_KEY"}
