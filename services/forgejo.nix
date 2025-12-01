@@ -7,16 +7,15 @@
 
 {
   # SOPS secret declarations
-  sops.templates."forgejo-admin-username" = {};
-  sops.secrets."forgejo-admin-username" = {
-    key = "forgejo.admin_username";
-    path = "/run/secrets/forgejo_admin_username";
+  sops.secrets."forgejo/admin_username" = {
+    owner = "forgejo";
+    group = "forgejo";
+    mode = "0400";
   };
-
-  sops.templates."forgejo-admin-password" = {};
-  sops.secrets."forgejo-admin-password" = {
-    key = "forgejo.admin_password";
-    path = "/run/secrets/forgejo_admin_password";
+  sops.secrets."forgejo/admin_password" = {
+    owner = "forgejo";
+    group = "forgejo";
+    mode = "0400";
   };
 
   services.forgejo = {
