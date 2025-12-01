@@ -2,29 +2,19 @@
 
 let
   smbServerIP = "cloud";
-  smbCredentialsFile = "/run/secrets/smb-credentials-file";
+  smbCredentialsFile = config.sops.templates."smb-credentials".path;
 
   # Define all the shares you want to mount in this list
   shares = [ "Stuff" "360" "mirrorless" "appdata" ];
 
 in {
-  # SMB credential secrets
-  sops.secrets."smb-username" = { key = "smb_credentials/username"; };
-  sops.secrets."smb-password" = { key = "smb_credentials/password"; };
-
-  # System activation script to create SMB credentials file
-  system.activationScripts.zz-createSmbCredentials = {
-    text = ''
-      (
-        echo -n "username="
-        cat ${config.sops.secrets."smb-username".path}
-        echo ""
-        echo -n "password="
-        cat ${config.sops.secrets."smb-password".path}
-        echo ""
-      ) > ${smbCredentialsFile}
-      chmod 400 ${smbCredentialsFile}
+  # SOPS template for SMB credentials file
+  sops.templates."smb-credentials" = {
+    content = ''
+      username=${config.sops.placeholder."smb_credentials/username"}
+      password=${config.sops.placeholder."smb_credentials/password"}
     '';
+    mode = "0400";
   };
 
   # CIFS utilities for SMB client functionality
