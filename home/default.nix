@@ -66,7 +66,6 @@
     borgbackup
     nil
     wev # Wayland event viewer for debugging input events
-    codex
 
     tree
     yazi
