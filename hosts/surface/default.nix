@@ -14,8 +14,8 @@
     # ../../system/shell.nix
   ];
 
-  # REMOVED: This is now handled by nixos-hardware and must be removed.
-  # boot.kernelPackages = pkgs.linuxPackages_surface;
+  # Use stable kernel to avoid Rust compilation issues with 6.15
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
   # Host-specific network configuration
   networking.hostName = "surface";
